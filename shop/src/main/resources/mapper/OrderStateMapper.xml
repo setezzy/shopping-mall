@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzy.shop.dao.OrderStateMapper">
+  <resultMap id="BaseResultMap" type="com.zzy.shop.po.OrderState">
+    <id column="osid" jdbcType="INTEGER" property="osid" />
+    <result column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="ostate" jdbcType="INTEGER" property="ostate" />
+    <result column="operate" jdbcType="INTEGER" property="operate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    osid, oid, ostate, operate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_state
+    where osid = #{osid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_state
+    where osid = #{osid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzy.shop.po.OrderState">
+    insert into order_state (osid, oid, ostate, 
+      operate)
+    values (#{osid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{ostate,jdbcType=INTEGER}, 
+      #{operate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzy.shop.po.OrderState">
+    insert into order_state
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="osid != null">
+        osid,
+      </if>
+      <if test="oid != null">
+        oid,
+      </if>
+      <if test="ostate != null">
+        ostate,
+      </if>
+      <if test="operate != null">
+        operate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="osid != null">
+        #{osid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="ostate != null">
+        #{ostate,jdbcType=INTEGER},
+      </if>
+      <if test="operate != null">
+        #{operate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzy.shop.po.OrderState">
+    update order_state
+    <set>
+      <if test="oid != null">
+        oid = #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="ostate != null">
+        ostate = #{ostate,jdbcType=INTEGER},
+      </if>
+      <if test="operate != null">
+        operate = #{operate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where osid = #{osid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzy.shop.po.OrderState">
+    update order_state
+    set oid = #{oid,jdbcType=INTEGER},
+      ostate = #{ostate,jdbcType=INTEGER},
+      operate = #{operate,jdbcType=INTEGER}
+    where osid = #{osid,jdbcType=INTEGER}
+  </update>
+</mapper>

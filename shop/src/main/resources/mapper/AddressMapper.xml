@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzy.shop.dao.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.zzy.shop.po.Address">
+    <id column="addrid" jdbcType="INTEGER" property="addrid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="adress" jdbcType="VARCHAR" property="adress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    addrid, uid, uname, phone, adress
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from address
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzy.shop.po.Address">
+    insert into address (addrid, uid, uname, 
+      phone, adress)
+    values (#{addrid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=INTEGER}, #{adress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzy.shop.po.Address">
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addrid != null">
+        addrid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="adress != null">
+        adress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addrid != null">
+        #{addrid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="adress != null">
+        #{adress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzy.shop.po.Address">
+    update address
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="adress != null">
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzy.shop.po.Address">
+    update address
+    set uid = #{uid,jdbcType=INTEGER},
+      uname = #{uname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=INTEGER},
+      adress = #{adress,jdbcType=VARCHAR}
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </update>
+</mapper>
