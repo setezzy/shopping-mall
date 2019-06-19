@@ -1,6 +1,162 @@
-## 系统功能
+# 1. 系统整体设计
 
-### 访客浏览
+# 2. 数据库设计
+
+## 2.1 数据表设计
+
+1. user  用户表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| uid | int(20) |  | YES | 用户id |
+| uname | varchar(30) |  |  | 用户名 |
+| password | varchar(32) |  |  | 用户密码 |
+| phone | varchar(11) |  |  | 手机号 |
+| address | varchar(255) |  |  | 地址 |
+| state | int(2) |  |  | 用户状态 |
+
+2. address 地址表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| addrid | int(20) |  | YES | 地址id |
+| uid | int(20) |  | YES | 用户id |
+| uname | varchar(30) |  |  | 用户名 |
+| phone | varchar(11) |  |  | 手机号 |
+| address | varchar(255) |  |  | 地址 |
+
+
+3. admin  管理员表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| uid |  int(20) |  | YES | 用户id |
+| uname | varchar(30) |  |  | 用户名 |
+| password | varchar(32) |  |  | 密码 |
+| state | int(2) |  |  | 用户状态 |
+
+
+4. user_role  用户角色关联表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| urid |  int(20) |  | YES | 用户角色id |
+| uid |  int(20) |  |  | 用户id |
+| rid |  int(20) |  |  | 角色id |
+
+5. role  角色表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| rid |  int(20) |  | YES | 角色id |
+| rname | varchar(30) |  |  | 角色名 |
+| state | int(2) |  |  | 角色状态 |
+
+
+6. role_menu  角色权限表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| rmid |  int(20) |  | YES | 角色权限id |
+| rid |  int(20) |  |  | 角色id |
+| mid |  int(20) |  |  | 权限id |
+
+
+7. menu 权限菜单表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| mid |  int(20) |  | YES | 权限id |
+| mname |  varchar(30) |  |  | 权限名称 |
+| mtype |  int(2) |  |  | 权限类型 |
+| parentid |  int(20) |  |  | 上级id |
+| state | int(2) |  |  | 权限状态 |
+| href  | varchar(255) | | | 指向地址 |
+| permission  | varchar(255) | | | 指向地址 |
+
+
+8. product 商品表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| pid |  int(20) |  | YES | 商品id |
+| pname |  varchar(30) |  |  | 商品名称 |
+| price |  demical(10,2) |  |  | 商品价格 |
+| description |  int(20) |  |  | 商品描述 |
+| image | varchar(255) |  |  | 图片 |
+| amount  | varchar(255) | | | 商品库存 |
+| pdate  | varchar(255) | | | 上架日期 |
+| pnumber  | varchar(255) | | | 商品编号 |
+
+
+9. product_category 商品分类表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| pcid |  int(20) |  | YES | 商品分类id |
+| pid |  int(20) |  |  | 商品id |
+| cid |  int(20) |  |  | 二级分类id |
+
+10. category 二级分类表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| cid |  int(20) |  | YES | 二级分类id |
+| parentid |  int(20) |  |  | 父级分类id |
+| cname | varchar(30) | | | 二级分类名|
+| ctype | int(2) | | | 分类类型|
+
+11. categoryparent 一级分类表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| cpid |  int(20) |  | YES | 一级分类id |
+| cpname | varchar(30) | | | 一级分类名|
+
+
+12. order 订单表
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| oid |  int(20) |  | YES | 订单id |
+| onumber | int(20) | | | 订单编号|
+| uid |  int(20) |  |  | 用户id |
+| ostate | int(2) | | | 订单状态|
+| odate | datetime | | | 创建时间|
+| oprice |  demical(10,2) |  |  | 订单总价 |
+| itemamount | int(20) | | | 商品数量 |
+
+
+13. order_product 订单商品表
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| opid |  int(20) |  | YES | 订单商品id |
+| oid |  int(20) |  |  | 订单id |
+| pname |  varchar(30) |  |  | 商品名称 |
+| image | varchar(255) |  |  | 图片 |
+| pnumber  | varchar(255) | | | 商品编号 |
+| price |  demical(10,2) |  |  | 商品价格 |
+
+
+14. order_state 订单状态表
+
+|  | 数据类型 | 允许空值 | 自动递增 | 备注 |
+| --- | --- | --- | --- | --- |
+| osid |  int(20) |  | YES | 订单状态id |
+| oid |  int(20) |  |  | 订单id |
+| ostate |  int(2) |  |  | 订单状态 |
+| operate | int(2) | | | 操作类型|
+
+
+## 数据库模型
+
+数据库模型图如下：
+
+![database](https://github.com/setezzy/shopping-mall/pic/database.png)
+
+
+# 3. 系统功能规定及验收标准
+
+### 3.1. 访客浏览
 
 <table border='0'>
   <tr>
@@ -39,7 +195,7 @@
   </tr> 
   </table>
   
-  ### 用户登录/注销
+  ### 3.2 用户登录/注销
   <table border='0'>
     <tr>
     <td>功能</td>
@@ -97,7 +253,7 @@
   </tr>
 </table>
 
-### 查看商品、提交订单
+### 3.3 查看商品、提交订单
 <table border='0'>
     <tr>
     <td>功能</td>
@@ -254,7 +410,7 @@
   </tr>
 </table>
 
-### 销售商管理
+### 3.4 销售商管理
 
 <table border="0">
  <tr>
@@ -332,7 +488,7 @@
 </table>
 
 
-### 后台管理
+### 3.5 后台管理
 
 <table border="0">
  <tr>
