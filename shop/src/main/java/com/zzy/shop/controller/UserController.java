@@ -1,36 +1,61 @@
 package com.zzy.shop.controller;
-import javax.servlet.http.HttpServletRequest;
 
+import com.zzy.shop.util.Result;
+import com.zzy.shop.po.User;
+import com.zzy.shop.serviceimpl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.servlet.http.HttpServletRequest;
-import com.zzy.shop.po.User;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
-    private static Logger log = LoggerFactory.getLogger(UserController.class);
+    @Autowired
+    private UserServiceImpl UserServiceImpl;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test(HttpServletRequest request, Model model){
-        int userId = Integer.parseInt(request.getParameter("id"));
-        System.out.println(userId);
-        User user = null;
-        if (userId == 1){
-            user = new User();
-            user.setUid(1);
-            user.setPassword("123");
-            user.setUname("pororo");
+    // login
+    @RequestMapping("/login")
+    public String loginUI(HttpServletRequest request){
+        return "/user/user_login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Object login(@RequestParam("uname") String uname,
+                        @RequestParam("password") String password,
+                        HttpSession session){
+
+        User user = UserServiceImpl.selectUser(uname, password);
+        if(user == null){
+            return new Result(0, "登录失败，用户名或密码错误");
         }
-        log.debug(user.toString());
-        model.addAttribute("user", user);
-        return "/index";
+        if(password.equals(user.getPassword())){
+            user.setState(1);
+            UserServiceImpl.updateUser(user);
+            session.setAttribute("user", user);
+            return new Result(1, "欢迎登录");
+        }
+        else{
+            return new Result(0, "登录失败，用户名或密码错误");
+        }
+
+    }
+
+    // logout
+    @RequestMapping("/logout")
+    public String loginUI(HttpServletRequest request, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        user.setState(0);
+        UserServiceImpl.updateUser(user);
+        session.invalidate();
+        return "redirect:/index";
     }
 
 }

@@ -6,6 +6,21 @@
     <result column="parentid" jdbcType="INTEGER" property="parentid" />
     <result column="cname" jdbcType="VARCHAR" property="cname" />
     <result column="ctype" jdbcType="INTEGER" property="ctype" />
+    <result column="sort" jdbcType="INTEGER" property="sort"/>
+  </resultMap>
+  <resultMap id="IndexCategory" type="com.zzy.shop.vo.CategoryVO">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <collection property="products" ofType="com.zzy.shop.po.Product">
+      <id column="pid" jdbcType="INTEGER" property="pid" />
+      <result column="pname" jdbcType="VARCHAR" property="pname" />
+      <result column="price" jdbcType="DECIMAL" property="price" />
+      <result column="description" jdbcType="VARCHAR" property="description" />
+      <result column="image" jdbcType="VARCHAR" property="image" />
+      <result column="amount" jdbcType="INTEGER" property="amount" />
+      <result column="pdate" jdbcType="TIMESTAMP" property="pdate" />
+      <result column="pnumber" jdbcType="INTEGER" property="pnumber" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     cid, parentid, cname, ctype
@@ -15,6 +30,63 @@
     <include refid="Base_Column_List" />
     from category
     where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <select id="selectParentCategoryByProductId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select distinct
+        c2.cid,
+        c2.cname
+    from
+        category c1,
+        category c2
+        product_category pc
+    where
+        c1.cid = pc.cid
+    and c1.parentid = c2.cid
+    and pc.pid = #{pid, jdbcType=INTEGER}
+  </select>
+  <select id="listChildCategories" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select distinct
+        c2.*
+    from
+        category c1,
+        category c2
+    where
+        c1.cid = c2.parentid
+    and c1.cid = #{cid, jdbcType=INTEGER}
+    order by c2.sort
+  </select>
+  <select id="listParentCategories" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select distinct
+        c2.*
+    from
+        category c1
+        category c2
+    where
+        c1.cid = c2.parentid
+    and c2.cid = #{cid, jdbcType=INTEGER}
+    order by c2.sort
+  </select>
+  <select id="selectIndexCategory" resultMap="IndexCategory">
+    select
+        c2.cid,
+        c2.cname,
+        p.pid,
+        p.pnumber,
+        p.pname,
+        p.price,
+        p.description,
+        p.image,
+        p.amount,
+        p.pdate
+    from
+        product p,
+        product_category pc,
+        category c1,
+        category c2
+    where
+        p.pid = pc.pid
+    and c1.cid = pc.cid
+    and c2.cid = c1.parentid
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from category

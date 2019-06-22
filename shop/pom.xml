@@ -201,6 +201,20 @@
       <version>2.9.9</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.54</version>
+    </dependency>
+
+    <!-- sitemesh -->
+    <dependency>
+      <groupId>org.sitemesh</groupId>
+      <artifactId>sitemesh</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
     <dependency>
