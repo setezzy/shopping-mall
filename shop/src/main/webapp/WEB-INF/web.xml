@@ -32,6 +32,14 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
   <!-- Spring MVC servlet 配置前段控制器-->
   <servlet>
@@ -58,7 +66,7 @@
 
 
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file></welcome-file>
   </welcome-file-list>
 
 </web-app>

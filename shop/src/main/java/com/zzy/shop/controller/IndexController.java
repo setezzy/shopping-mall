@@ -19,6 +19,7 @@ public class IndexController {
     @Autowired
     CategoryServiceImpl CategoryServiceImpl;
 
+
     @RequestMapping("/index")
     public String index(HttpServletRequest request, HttpSession session){
         //导航栏商品信息

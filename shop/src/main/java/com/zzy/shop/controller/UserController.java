@@ -21,7 +21,7 @@ public class UserController {
     private UserServiceImpl UserServiceImpl;
 
     // login
-    @RequestMapping("/login")
+    @RequestMapping(value = {"/login", "/"})
     public String loginUI(HttpServletRequest request){
         return "/user/user_login";
     }
@@ -30,7 +30,13 @@ public class UserController {
     @ResponseBody
     public Object login(@RequestParam("uname") String uname,
                         @RequestParam("password") String password,
+                        @RequestParam("vcode") String vcode,
                         HttpSession session){
+
+        String sessionCode = (String) session.getAttribute("verifycode");
+        if(!sessionCode.equalsIgnoreCase(vcode)){
+            return new Result(0, "登录失败，验证码错误");
+        }
 
         User user = UserServiceImpl.selectUser(uname, password);
         if(user == null){

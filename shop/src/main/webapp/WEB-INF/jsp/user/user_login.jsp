@@ -44,6 +44,16 @@
                                 <label class="strength"> <span class="f-fl f-size12">安全程度：</span> <b><i>弱</i><i>中</i><i>强</i></b> </label>
                             </div>
                         </div>
+                        <div class="item col-xs-12">
+                            <div class="f-fl item-info">
+                                <input type="text" name="vcode" placeholder="验证码" maxlength="4" class="txt03 f-r3 required loginPage" tabindex="4" data-valid="isNonEmpty" data-error="请输入验证码" id="vcode" />
+                                <span class="ie8 icon-close close hide"></span>
+                                <label class="icon-sucessfill blank hide"></label>
+                                <label class="focus"></label>
+                                <label class="focus valid"></label>
+                                <img style="position:absolute;right:220px;top:10px" src="${zzy}/checkImg" width="110" height="34" id="vcodeImg";>
+                            </div>
+                        </div>
                     </form>
                     <div class="item col-xs-12 message" style="height:auto">
                         <label class="valid" ></label>

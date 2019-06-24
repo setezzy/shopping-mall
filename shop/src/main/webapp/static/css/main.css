@@ -1831,7 +1831,7 @@
 	position: relative;
 	float: left;
 	width: 482px;
-	height: 200px;
+	height: 40px;
 	padding-left: 180px;
 	padding-top: 40px
 }
@@ -1865,7 +1865,7 @@
 .portal-content-box .user-actions {
 	float: right;
 	width: 358px;
-	margin-top: 35px
+	margin-top: 60px
 }
 
 .portal-content-box .action-list {

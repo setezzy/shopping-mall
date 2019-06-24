@@ -28,32 +28,32 @@
                             <ul class="ull">
                                 <li><a href="${indexCarouselImg.href}"
                                        title="${indexCarouselImg.title}" target="_blank"> <img
-                                        src="${zzyimg}/advert/ad1.jpg"
+                                        src="${zzyimg}/advert/ad-1.png"
                                         alt="${indexCarouselImg.title }"></a>
                                 </li>
                                 <li><a href="${indexCarouselImg.href}"
                                        title="${indexCarouselImg.title}" target="_blank"> <img
-                                        src="${zzyimg}/advert/ad2.jpg"
+                                        src="${zzyimg}/advert/ad-2.png"
                                         alt="${indexCarouselImg.title }"></a>
                                 </li>
                                 <li><a href="${indexCarouselImg.href}"
                                        title="${indexCarouselImg.title}" target="_blank"> <img
-                                        src="${zzyimg}/advert/ad3.jpg"
+                                        src="${zzyimg}/advert/ad-3.png"
                                         alt="${indexCarouselImg.title }"></a>
                                 </li>
                                 <li><a href="${indexCarouselImg.href}"
                                        title="${indexCarouselImg.title}" target="_blank"> <img
-                                        src="${zzyimg}/advert/ad4.jpg"
+                                        src="${zzyimg}/advert/ad-4.png"
                                         alt="${indexCarouselImg.title }"></a>
                                 </li>
                                 <li><a href="${indexCarouselImg.href}"
                                        title="${indexCarouselImg.title}" target="_blank"> <img
-                                        src="${zzyimg}/advert/ad5.jpg"
+                                        src="${zzyimg}/advert/ad-5.png"
                                         alt="${indexCarouselImg.title }"></a>
                                 </li>
                                 <li><a href="${indexCarouselImg.href}"
                                        title="${indexCarouselImg.title}" target="_blank"> <img
-                                        src="${zzyimg}/advert/ad6.jpg"
+                                        src="${zzyimg}/advert/ad-6.png"
                                         alt="${indexCarouselImg.title }"></a>
                                 </li>
                             </ul>

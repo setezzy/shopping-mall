@@ -580,6 +580,7 @@ $(function() {
 			exponent = $("#password").attr("data-exponent")*/
 		password = $("#password").val();
 		uname = $("#uname").val();
+		vcode = $("#vcode").val();
 		if (password.length != 256) {
 			//var publicKey = RSAUtils.getKeyPair(exponent, '', modulus);
 			//loginPassword = RSAUtils.encryptedString(publicKey, loginPassword);
@@ -589,7 +590,8 @@ $(function() {
 			url : baselocation + '/login',
 			data : {
 				"uname" : uname,
-				"password" : password
+				"password" : password,
+				"vcode": vcode
 			},
 			dataType : "json",
 			success : function(result) {
@@ -605,6 +607,15 @@ $(function() {
 	});
 });
 
+/**
+ * 验证码更改
+ */
+$(function () {
+	$('#vcodeImg').click(function () {
+		$(this).attr('src', baselocation + 'checkImg');
+	})
+
+})
 
 /**
  * 找回密码
@@ -716,9 +727,8 @@ function closeClause() {
 	$(".m-sPopBg,.m-sPopCon").hide();
 }
 
-/**
- * 验证码更改
- */
+
+
 $(function() {
 	$('#kaptchaImage').click(function() {
 		$(this).attr('src', baselocation + '/pass/captcha-image.jpg?' + Math.floor(Math.random() * 100));

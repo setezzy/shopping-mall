@@ -1,9 +1,7 @@
-package com.zzy.shop.po;
+package com.zzy.shop.vo;
 
-public class Address {
+public class AddressVO {
     private Integer addrid;
-
-    private Integer uid;
 
     private String uname;
 
@@ -17,14 +15,6 @@ public class Address {
 
     public void setAddrid(Integer addrid) {
         this.addrid = addrid;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     public String getUname() {

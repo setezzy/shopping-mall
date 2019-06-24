@@ -5,11 +5,11 @@
     <id column="addrid" jdbcType="INTEGER" property="addrid" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="uname" jdbcType="VARCHAR" property="uname" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
-    <result column="adress" jdbcType="VARCHAR" property="adress" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
   </resultMap>
   <sql id="Base_Column_List">
-    addrid, uid, uname, phone, adress
+    addrid, uid, uname, phone, address
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.Address">
     insert into address (addrid, uid, uname, 
-      phone, adress)
+      phone, address)
     values (#{addrid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=INTEGER}, #{adress,jdbcType=VARCHAR})
+      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zzy.shop.po.Address">
     insert into address
@@ -42,8 +42,8 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="adress != null">
-        adress,
+      <if test="address != null">
+        address,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -57,13 +57,27 @@
         #{uname,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="adress != null">
-        #{adress,jdbcType=VARCHAR},
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from address
+    where
+      uid = #{uid, jdbcType=INTEGER}
+  </select>
+  <select id="selectByAddressId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from address
+    where
+      addrid = #{addrid, jdbcType=INTEGER}
+  </select>
   <update id="updateByPrimaryKeySelective" parameterType="com.zzy.shop.po.Address">
     update address
     <set>
@@ -74,10 +88,10 @@
         uname = #{uname,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="adress != null">
-        adress = #{adress,jdbcType=VARCHAR},
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
       </if>
     </set>
     where addrid = #{addrid,jdbcType=INTEGER}
@@ -86,8 +100,8 @@
     update address
     set uid = #{uid,jdbcType=INTEGER},
       uname = #{uname,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=INTEGER},
-      adress = #{adress,jdbcType=VARCHAR}
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
     where addrid = #{addrid,jdbcType=INTEGER}
   </update>
 </mapper>

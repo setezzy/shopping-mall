@@ -78,7 +78,7 @@
                         </ul>
                         <ul class="children-list children-list-col children-list-col-4">
                           <c:forEach items="${category.products}" var="product" begin="17" end="23">
-                            <li> <a class="link" title="${product.pname}" href="${zzy}/detail/${product.pnumber}"><img class="thumb" src="${ctximg}/${product.image}" width="40" height="40" alt="${product.pname}"><span class="text">${product.pname}</span></a> </li>
+                            <li> <a class="link" title="${product.pname}" href="${zzy}/detail/${product.pnumber}"><img class="thumb" src="${zzyimg}/${product.image}" width="40" height="40" alt="${product.pname}"><span class="text">${product.pname}</span></a> </li>
                           </c:forEach>
                         </ul>
                       </div>

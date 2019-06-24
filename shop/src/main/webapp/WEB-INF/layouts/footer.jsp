@@ -4,16 +4,7 @@
 <!--     底部信息  begin       -->
 <div class="site-footer">
     <div class="container-fluid">
-        <!--
-        <div class="footer-service">
-            <ul class="list-service clearfix">
-                <li> <a rel="nofollow" href="#"><span class="glyphicon glyphicon-wrench"></span>商品破损补寄</a> </li>
-                <li> <a rel="nofollow" href="#"><span class="glyphicon glyphicon-phone-alt"></span>7天无理由退货</a> </li>
-                <li> <a rel="nofollow" href="#"><span class="glyphicon glyphicon-usd"></span>满199元包邮</a> </li>
-                <li> <a rel="nofollow" href="#"><span class="glyphicon glyphicon-gift"></span>多仓直发</a> </li>
-            </ul>
-        </div>
-        -->
+
         <div class="footer-links clearfix">
             <dl class="col-links col-links-first">
                 <dt>配送方式</dt>
@@ -53,8 +44,8 @@
                 <dd><a rel="nofollow" href="#">订阅号</a></dd>
             </dl>
             <div class="col-contact">
-                <p class="phone"> 服务专线：000-1111 </p>
-                <p> <span class="J_serviceTime-normal" style="">时间 8:00-18:00</span> <span class="J_serviceTime-holiday" style="display: none;">节假日服务时间 9:00-18:00</span><br>
+                <p class="phone"> 网上商城 </p>
+                <p> <span class="J_serviceTime-normal" style="">感谢您的信赖</span> <span class="J_serviceTime-holiday" style="display: none;">节假日服务时间 9:00-18:00</span><br>
                 </p>
                 <a rel="nofollow" class="btn btn-line-primary btn-small" href="#"><span class="glyphicon glyphicon-earphone"></span> 24小时在线客服</a> </div>
             </div>

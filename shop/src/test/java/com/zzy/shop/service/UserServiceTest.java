@@ -24,10 +24,10 @@ public class UserServiceTest {
 
     @Test
     public void test1() {
-        User user = userService.selectUser("test","123");
+        User user = userService.selectUser("sophia","1qaz");
         String password = user.getPassword();
 
-        Assert.assertEquals("123", password);
+        Assert.assertEquals("1qaz", password);
         log.info(JSON.toJSONString(user));
 
     }
