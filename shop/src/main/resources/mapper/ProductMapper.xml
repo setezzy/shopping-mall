@@ -20,6 +20,22 @@
     from product
     where pid = #{pid,jdbcType=INTEGER}
   </select>
+  <select id="listByPage" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+       p.*
+    from
+      product_category pc left join product p on pc.pid=p.pid
+    where
+      pc.cid in
+      <foreach collection="cids" item="cid" open="(" close=")" separator=",">
+        #{cid}
+      </foreach>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select p.*
+    from
+      product_category pc left join product p on pc.pid=p.pid
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from product
     where pid = #{pid,jdbcType=INTEGER}

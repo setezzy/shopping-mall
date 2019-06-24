@@ -23,7 +23,7 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    cid, parentid, cname, ctype
+    cid, parentid, cname, ctype, sort
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -59,7 +59,7 @@
     select distinct
         c2.*
     from
-        category c1
+        category c1,
         category c2
     where
         c1.cid = c2.parentid
@@ -94,9 +94,9 @@
   </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.Category">
     insert into category (cid, parentid, cname, 
-      ctype)
+      ctype, sort)
     values (#{cid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, 
-      #{ctype,jdbcType=INTEGER})
+      #{ctype,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zzy.shop.po.Category">
     insert into category
@@ -113,6 +113,9 @@
       <if test="ctype != null">
         ctype,
       </if>
+      <if test="sort != null">
+        sort,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cid != null">
@@ -126,6 +129,9 @@
       </if>
       <if test="ctype != null">
         #{ctype,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -141,6 +147,9 @@
       <if test="ctype != null">
         ctype = #{ctype,jdbcType=INTEGER},
       </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
     </set>
     where cid = #{cid,jdbcType=INTEGER}
   </update>
@@ -148,7 +157,8 @@
     update category
     set parentid = #{parentid,jdbcType=INTEGER},
       cname = #{cname,jdbcType=VARCHAR},
-      ctype = #{ctype,jdbcType=INTEGER}
+      ctype = #{ctype,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
 </mapper>

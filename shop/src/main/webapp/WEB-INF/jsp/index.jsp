@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="${zzysta}/css/goods-detail.css" />
     <link rel="stylesheet" href="${zzysta}/css/list.css" />
     <link rel="stylesheet" href="${zzysta}/css/main.css" />
-
     <link rel="stylesheet" href="${zzysta}/css/base.css" />
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
 

@@ -41,7 +41,7 @@
 
 				var html = '';
 				html += '<b class="search-img"></b>';
-				html += '<input id="searchInput" class="search-input" type="text" placeholder="输入您想要的商品">';
+				html += '<input id="searchInput" class="search-input" type="text" placeholder="请输入您想要的商品">';
 				html += '<button class="search-btn btn">搜索</button>';
 
 				$(self).append(html);

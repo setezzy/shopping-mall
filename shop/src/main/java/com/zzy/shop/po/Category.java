@@ -9,6 +9,8 @@ public class Category {
 
     private Integer ctype;
 
+    private Integer sort;
+
     public Integer getCid() {
         return cid;
     }
@@ -40,4 +42,8 @@ public class Category {
     public void setCtype(Integer ctype) {
         this.ctype = ctype;
     }
+
+    public Integer getSort(){ return sort; }
+
+    public void setSort(Integer sort){ this.sort = sort; }
 }

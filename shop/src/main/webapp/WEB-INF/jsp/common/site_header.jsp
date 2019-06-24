@@ -6,11 +6,10 @@
 <div class="site-header">
   <div class="container-fluid">
     <div class="header-logo"> <a class="logo ir" href="${zzy}/index" title="网上商城"><img src="${zzysta}/imgs/logo2.png"></a> </div>
-    <div class="header-search"> <span class="zySearch" id="zySearch"></span> </div>
-  </div>
+
     <div class="header-nav">
       <ul class="nav-list J_navMainList clearfix">
-        <li id="J_navCategory" class="nav-category"> <a class="link-category" href="${zzy}/list?cid=1"><span class="text">全部商品分类</span></a>
+        <li id="J_navCategory" class="nav-category"> <a class="link-category" href="${zzy}/list?cid=1"><span class="text">全部商品</span></a>
           <!--     轮播top菜单导航begin       -->
           <div class="site-category">
             <ul class="site-category-list clearfix">
@@ -95,6 +94,8 @@
         </c:forEach>
       </ul>
     </div>
+    <div class="header-search"> <span class="zySearch" id="zySearch"></span> </div>
+  </div>
 </div>
 
 <script src="${zzysta}/common/jquery/jquery-3.2.0.min.js"></script>
