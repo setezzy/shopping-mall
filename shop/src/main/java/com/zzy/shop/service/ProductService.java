@@ -12,6 +12,6 @@ public interface ProductService {
     List<Product> pageProductInfo(Integer cid, Integer sort, Integer page, Integer limit);
 
     // 查询商品详情
-    Product getProductDetail(Integer pid);
+    Product getProductDetail(Integer pnumber);
 
 }

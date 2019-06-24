@@ -14,6 +14,8 @@ public interface ProductMapper {
 
     Product selectByPrimaryKey(Integer pid);
 
+    Product selectByProductNumber(Integer pnumber);
+
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);

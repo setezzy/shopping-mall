@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="${zzysta}/common/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="${zzysta}/css/base.css">
     <link rel="stylesheet" href="${zzysta}/css/main.css" />
+    <link rel="stylesheet" href="${ctxsta}/css/goods-detail.css">
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
 </head>
 <body>

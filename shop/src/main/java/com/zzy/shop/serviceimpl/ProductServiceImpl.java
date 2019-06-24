@@ -42,8 +42,8 @@ public class ProductServiceImpl implements ProductService{
      * 查询商品详情
      */
     @Override
-    public Product getProductDetail(Integer pid){
-        Product product = productMapper.selectByPrimaryKey(pid);
+    public Product getProductDetail(Integer pnumber){
+        Product product = productMapper.selectByProductNumber(pnumber);
         return product;
     }
 

@@ -20,6 +20,13 @@
     from product
     where pid = #{pid,jdbcType=INTEGER}
   </select>
+  <select id="selectByProductNumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where
+      pnumber = #{pnumber,jdbcType=INTEGER}
+  </select>
   <select id="listByPage" parameterType="java.util.List" resultMap="BaseResultMap">
     select
        p.*
