@@ -10,7 +10,7 @@
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/layouts/header.jsp" />
 <jsp:include page="/WEB-INF/jsp/common/site_header.jsp" />
 
 <c:if test="${not empty product}">
@@ -21,8 +21,9 @@
             <span class="sep">&gt;</span><a href="${zzy}/detail/${product.pnumber}">${product.pname}</a> </div>
     </div>
 
-        <!-- 商品简介begin-->
-        <div class="goods-detail  clearfix">
+    <div class="goods-detail">
+    <!-- 商品简介begin-->
+        <div class="goods-detail-info  clearfix J_goodsDetail">
             <div class="container-fluid">
                 <div class="row">
 
@@ -33,36 +34,34 @@
                     </div>
 
                     <div class="span7 goods-info-rightbox">
-                        <div class="goods-info-leftborder"></div>
                         <dl class="goods-info-box ">
                             <dt class="goods-info-head">
                                 <dl id="J_goodsInfoBlock">
                                     <dt id="goodsName" class="goods-name"> ${product.pname} </dt>
                                     <dd>&nbsp;</dd>
                                     <dd>&nbsp;</dd>
-                                    <dd class="goods-info-head-price clearfix"> ${product.price} <i>&nbsp;元</i> </dd>
+                                    <dd class="goods-info-head-price clearfix"> 价格：${product.price} <i>&nbsp;元</i> </dd>
+                                    <dd>&nbsp;</dd>
+                                    <dd>&nbsp;</dd>
+                                    <dd>库存还剩：${product.amount} <i>&nbsp;件</i> </dd>
                                     <dd>&nbsp;</dd>
                                     <dd>&nbsp;</dd>
                                     <dd>&nbsp;</dd>
-                                    <dd class="goods-info-head-cart" id="goodsDetailBtnBox">
-                                        <a onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number="${product.amount}">
-                                            <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车</a>
-                                        <a id="goodsDetailCollectBtn" data-pid="${product.pnumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn"  onclick="add_favorite(this);">
-                                            <i class="glyphicon glyphicon-heart-empty"></i> 库存:&nbsp;${product.amount}</a>
-                                    </dd>
-                                    <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;">
-                                        <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143">
-                                            <i class="iconfont "></i>到货通知 </a></dd>
-                                    <dd class="goods-info-head-userfaq">
-                                    </dd>
                                 </dl>
                             </dt>
                         </dl>
+                        <div class="goods-info-head-cart" id="goodsDetailBtnBox">
+                            <div onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" >
+                                <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车</div>
+                            <div onclick="direct_buy(this)" id="directBuy" class=" btn btn-primary " data-product-number="${product.pnumber}">
+                                <i class="glyphicon glyphicon-heart-empty"></i> 直接购买 </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
+    </div>
 
         <!-- 商品简介end-->
 

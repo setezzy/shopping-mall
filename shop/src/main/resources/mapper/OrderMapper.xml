@@ -3,7 +3,7 @@
 <mapper namespace="com.zzy.shop.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.zzy.shop.po.Order">
     <id column="oid" jdbcType="INTEGER" property="oid" />
-    <result column="onumber" jdbcType="INTEGER" property="onumber" />
+    <result column="onumber" jdbcType="BIGINT" property="onumber" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="ostate" jdbcType="INTEGER" property="ostate" />
     <result column="odate" jdbcType="TIMESTAMP" property="odate" />
@@ -11,29 +11,68 @@
     <result column="oprice" jdbcType="DECIMAL" property="oprice" />
     <result column="itemamount" jdbcType="INTEGER" property="itemamount" />
   </resultMap>
+
+  <resultMap id="OrderVOResultMap" type="com.zzy.shop.vo.OrderVO">
+    <id column="oid1" jdbcType="INTEGER" property="oid" />
+    <result column="onumber" jdbcType="BIGINT" property="onumber" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="ostate1" jdbcType="INTEGER" property="ostate" />
+    <result column="odate1" jdbcType="TIMESTAMP" property="odate" />
+    <result column="oupdate1" jdbcType="TIMESTAMP" property="oupdate" />
+    <result column="oprice" jdbcType="DECIMAL" property="oprice" />
+    <result column="itemamount" jdbcType="INTEGER" property="itemamount" />
+    <association property="orderShipment" javaType="com.zzy.shop.po.OrderShipment">
+      <id column="oshid" jdbcType="INTEGER" property="oshid" />
+      <result column="oid4" jdbcType="INTEGER" property="oid" />
+      <result column="uname4" jdbcType="INTEGER" property="uname" />
+      <result column="phone4" jdbcType="VARCHAR" property="phone" />
+      <result column="address4" jdbcType="VARCHAR" property="address" />
+    </association>
+    <collection property="orderProducts" ofType="com.zzy.shop.po.OrderProduct">
+      <id column="opid" jdbcType="INTEGER" property="opid" />
+      <result column="oid2" jdbcType="INTEGER" property="oid" />
+      <result column="pname" jdbcType="VARCHAR" property="pname" />
+      <result column="image" jdbcType="VARCHAR" property="image" />
+      <result column="price" jdbcType="DECIMAL" property="price" />
+      <result column="pnumber" jdbcType="INTEGER" property="pnumber" />
+    </collection>
+    <collection property="orderStates" ofType="com.zzy.shop.po.OrderState">
+      <id column="osid" jdbcType="INTEGER" property="osid" />
+      <result column="oid3" jdbcType="INTEGER" property="oid" />
+      <result column="ostate3" jdbcType="INTEGER" property="ostate" />
+      <result column="operate" jdbcType="INTEGER" property="operate" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
     oid, onumber, uid, ostate, odate, oupdate, oprice, itemamount
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from orders
     where oid = #{oid,jdbcType=INTEGER}
   </select>
+  <select id="selectByOrderNumber" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from orders
+    where onumber = #{onumber, jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from orders
     where oid = #{oid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.Order">
-    insert into order (oid, onumber, uid, 
-      ostate, odate, oupdate, 
-      oprice, itemamount)
-    values (#{oid,jdbcType=INTEGER}, #{onumber,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+    insert into orders (oid, onumber, uid, ostate, odate, oupdate, oprice, itemamount)
+    values (#{oid,jdbcType=INTEGER}, #{onumber,jdbcType=BIGINT}, #{uid,jdbcType=INTEGER},
       #{ostate,jdbcType=INTEGER}, #{odate,jdbcType=TIMESTAMP}, #{oupdate,jdbcType=TIMESTAMP}, 
       #{oprice,jdbcType=DECIMAL}, #{itemamount,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zzy.shop.po.Order">
-    insert into order
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into orders
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="oid != null">
         oid,
@@ -65,7 +104,7 @@
         #{oid,jdbcType=INTEGER},
       </if>
       <if test="onumber != null">
-        #{onumber,jdbcType=INTEGER},
+        #{onumber,jdbcType=BIGINT},
       </if>
       <if test="uid != null">
         #{uid,jdbcType=INTEGER},
@@ -88,10 +127,10 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zzy.shop.po.Order">
-    update order
+    update orders
     <set>
       <if test="onumber != null">
-        onumber = #{onumber,jdbcType=INTEGER},
+        onumber = #{onumber,jdbcType=BIGINT},
       </if>
       <if test="uid != null">
         uid = #{uid,jdbcType=INTEGER},
@@ -115,8 +154,8 @@
     where oid = #{oid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zzy.shop.po.Order">
-    update order
-    set onumber = #{onumber,jdbcType=INTEGER},
+    update orders
+    set onumber = #{onumber,jdbcType=BIGINT},
       uid = #{uid,jdbcType=INTEGER},
       ostate = #{ostate,jdbcType=INTEGER},
       odate = #{odate,jdbcType=TIMESTAMP},
@@ -125,4 +164,39 @@
       itemamount = #{itemamount,jdbcType=INTEGER}
     where oid = #{oid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByUserId" parameterType="com.zzy.shop.vo.OrderVO" resultMap="OrderVOResultMap">
+    select
+    oo.oid as oid1, onumber, uid, oo.ostate as ostate1, oo.odate as odate1, oo.oupdate as oupdate1, itemamount,
+    oprice, opid, oop.oid as oid2, pnumber, pname, image, price,
+    osid, oos.oid as oid3, oos.ostate as ostate3, operate
+    FROM
+        orders oo,
+        order_product oop,
+        order_state oos
+    WHERE
+        oo.oid = oos.oid
+    AND oop.oid = oo.oid
+    AND oo.uid = #{uid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectOrderVOByOrderNumber" parameterType="java.lang.Long" resultMap="OrderVOResultMap">
+    select
+    oo.oid as oid1, onumber, uid, oo.ostate as ostate1, oo.odate as odate1, oo.oupdate as oupdate1, itemamount,
+    oprice, opid, oop.oid as oid2, pnumber, pname, image, price,
+    osid, oos.oid as oid3, oos.ostate as ostate3, operate,
+    oshid, oosh.oid as oid4, uname as uname4,
+    phone as phone4, address as address4
+    FROM
+    orders oo,
+    order_product oop,
+    order_state oos,
+    order_shipment oosh
+    WHERE
+    oo.oid = oos.oid
+    AND oop.oid = oo.oid
+    AND oo.oid = oosh.oid
+    AND oo.onumber = #{onumber,jdbcType=BIGINT}
+  </select>
+
 </mapper>

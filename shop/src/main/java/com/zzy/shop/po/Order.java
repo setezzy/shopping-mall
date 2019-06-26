@@ -6,7 +6,7 @@ import java.util.Date;
 public class Order {
     private Integer oid;
 
-    private Integer onumber;
+    private Long onumber;
 
     private Integer uid;
 
@@ -28,11 +28,11 @@ public class Order {
         this.oid = oid;
     }
 
-    public Integer getOnumber() {
+    public Long getOnumber() {
         return onumber;
     }
 
-    public void setOnumber(Integer onumber) {
+    public void setOnumber(Long onumber) {
         this.onumber = onumber;
     }
 

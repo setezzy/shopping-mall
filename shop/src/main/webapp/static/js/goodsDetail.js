@@ -97,109 +97,22 @@ $(".goods-info-head-userfaq .detail-list a").click(function () {
     }
 });
 
-/**
- * 商品规格选择
- */
-$(function () {
-    $(".goods-info-head .sys_item_specpara").each(function () {
-        var i = $(this);
-        var p = i.find("ul>li");
-        p.click(function () {
-            $(this).addClass("current").siblings("li").removeClass("current");
-            i.attr("data-attrval", $(this).attr("data-aid"))
-            getattrprice() //输出价格
-        })
-    })
 
-    var $elements = $('.sys_item_specpara');
-    $elements.each(function () {
-        var $this = $(this);
-        $this.children('ul').children('li:first').click(); //第一种规格
-    })
-
-    //获取对应属性的价格
-    function getattrprice() {
-        var defaultstats = true;
-        var _val = '';
-        var _resp = {
-            score: ".sys_item_score",
-            price: ".sys_item_price",
-        } //输出对应的class
-        $(".goods-info-head .sys_item_specpara").each(function () {
-            var i = $(this);
-            var v = i.attr("data-attrval");
-            if (!v) {
-                defaultstats = false;
-                $('#goodsDetailBtnBox').css('display', 'block');
-                $('#goodsDetailBtnBoxForInform').css('display', 'none');
-            } else {
-                _val += _val != "" ? "," : "";
-                _val += v;
-            }
-        })
-        if (!!defaultstats) {
-            if (typeof (sys_item[_val]) == "undefined") {
-                $('#goodsDetailBtnBox').css('display', 'none');
-                $('#goodsDetailBtnBoxForInform').css('display', 'block');
-            } else {
-                //_score = sys_item[_val]['score'];
-                _price = sys_item[_val]['price'];
-                _productSpecNumber = sys_item[_val]['productSpecNumber'];
-                $('#goodsDetailBtnBox').css('display', 'block');
-                $('#goodsDetailBtnBoxForInform').css('display', 'none');
-            }
-
-        } else {
-            // 默认商品规格
-            //_score = default_score;
-            _price = default_price;
-            _productSpecNumber = sys_item['productSpecNumber'];
-        }
-        //输出价格
-        //$(_resp.score).text(_score); //其中的math.round为截取小数点位数
-        $(_resp.price).text(_price);
-        $("#goodsDetailAddCartBtn").attr("data-product-spec-number", _productSpecNumber);
-        $("#goodsSubBarAddCartBtn").attr("data-product-spec-number", _productSpecNumber);
-    }
-})
-
-/**
- * 默认商品规格
- */
-$(function () {
-    if ($('#J_goodsInfoBlock').children('.sys_item_specpara').length <= 0) {
-        // 默认商品规格
-        //_score = sys_item['default']['score'];
-        _price = sys_item['default']['price'];
-        _productSpecNumber = sys_item['default']['productSpecNumber'];
-
-        // 输出对应的class
-        var _resp = {
-            //score: ".sys_item_score",
-            price: ".sys_item_price",
-        }
-
-        $(_resp.score).text(_score); // 其中的math.round为截取小数点位数
-        $(_resp.price).text(_price);
-        $("#goodsDetailAddCartBtn").attr("data-product-spec-number", _productSpecNumber);
-        $("#goodsSubBarAddCartBtn").attr("data-product-spec-number", _productSpecNumber);
-    }
-})
 
 
 /**
  * 加入购物车
  */
 function add_cart(obj) {
-    var productSpecNumber = $(obj).attr("data-product-spec-number");
-    if(productSpecNumber == "" || productSpecNumber == undefined || productSpecNumber == null) {
-        productSpecNumber = sys_item['default']['productSpecNumber'];
-    }
+    layer.alert("暂未开通该功能", {
+        icon: 5
+    });
+    var pnumber = $(obj).attr("data-product-number");
     $.ajax({
         type: 'post',
         dataType: 'json',
         data: {
-            'productSpecNumber': productSpecNumber
+            'pnumber': pnumber
         },
         url: baselocation + '/cart',
         success: function (result) {
@@ -216,3 +129,41 @@ function add_cart(obj) {
         }
     })
 }
+
+
+
+/**
+ * 直接购买
+ */
+
+function direct_buy(obj){
+        var pnumber = $(obj).attr("data-product-number"),
+            dat = {};
+        dat.pnumber = pnumber;
+        $.ajax({
+            type: 'post',
+            url: baselocation + '/buy/product',
+            data: dat,
+            dataType: "json",
+            success: function (result) {
+                if(result.code == 1){
+                    window.location.href = baselocation + '/buy/checkout'
+                }
+                else if(result.code == 401){
+                    layer.alert(result.message, {
+                        icon: 4
+                    });
+                    window.location.href = '/shop_war_exploded/login'
+                }
+                else{
+                    layer.alert(result.message, {
+                        icon: 2
+                    });
+                }
+            },
+            error: function(result){
+                alert(result)
+            }
+        })
+}
+

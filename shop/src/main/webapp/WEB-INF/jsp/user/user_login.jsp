@@ -51,7 +51,7 @@
                                 <label class="icon-sucessfill blank hide"></label>
                                 <label class="focus"></label>
                                 <label class="focus valid"></label>
-                                <img style="position:absolute;right:220px;top:10px" src="${zzy}/checkImg" width="110" height="34" id="vcodeImg";>
+                                <img style="position:absolute;right:180px;top:9px" src="${zzy}/checkImg" width="110" height="34" id="vcodeImg";>
                             </div>
                         </div>
                     </form>

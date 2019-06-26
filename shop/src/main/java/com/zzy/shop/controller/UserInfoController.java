@@ -1,6 +1,5 @@
 package com.zzy.shop.controller;
 
-import com.zzy.shop.service.AddressService;
 import com.zzy.shop.serviceimpl.AddressServiceImpl;
 import com.zzy.shop.serviceimpl.UserServiceImpl;
 import com.zzy.shop.util.Result;
@@ -10,14 +9,12 @@ import com.zzy.shop.po.Product;
 import com.zzy.shop.po.User;
 
 import com.zzy.shop.vo.AddressVO;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -44,6 +41,7 @@ public class UserInfoController {
     public Object infoModify(){
         return "/user/user_password";
     }
+
 
     @RequestMapping(value =  "/info/update", method = RequestMethod.POST)
     @ResponseBody

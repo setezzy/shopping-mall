@@ -2,6 +2,8 @@ package com.zzy.shop.dao;
 
 import com.zzy.shop.po.OrderProduct;
 
+import java.util.List;
+
 public interface OrderProductMapper {
     int deleteByPrimaryKey(Integer opid);
 
@@ -14,4 +16,6 @@ public interface OrderProductMapper {
     int updateByPrimaryKeySelective(OrderProduct record);
 
     int updateByPrimaryKey(OrderProduct record);
+
+    List<OrderProduct> selectByOrderId(Integer oid);
 }

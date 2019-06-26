@@ -82,18 +82,18 @@
                     <div class="portal-sub">
                         <ul class="info-list clearfix">
                             <li>
-                                <h3>待支付订单：<span class="num">0</span></h3>
-                                <a href="${zzy}/uc/order/list?type=1">查看待支付订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-1.png" alt=""> </li>
+                                <h3>已提交订单：<span class="num">0</span></h3>
+                                <a href="${zzy}/uc/order/list?ostate=1">查看已提交订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-1.png" alt=""> </li>
                             <li>
                                 <h3>待收货订单：<span class="num">0</span></h3>
-                                <a href="${zzy}/uc/order/list?type=2">查看待收货订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-2.png" alt=""> </li>
+                                <a href="${zzy}/uc/order/list?ostate=2">查看待收货订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-2.png" alt=""> </li>
                             <li>
                                 <h3>已拒绝订单：<span class="num">0</span></h3>
-                                <a href="${zzy}/uc/order/list?type=3">查看已拒绝订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-3.png" alt="">
+                                <a href="${zzy}/uc/order/list?ostate=3">查看已拒绝订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-3.png" alt="">
                             </li>
                             <li>
                                 <h3>已关闭订单：<span class="num">0</span></h3>
-                                <a href="${zzy}/uc/order/list?type=3">查看已关闭订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-4.png" alt="">
+                                <a href="${zzy}/uc/order/list?ostate=4">查看已关闭订单&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></a> <img src="${zzysta}/imgs/portal-4.png" alt="">
                             </li>
                         </ul>
                     </div>

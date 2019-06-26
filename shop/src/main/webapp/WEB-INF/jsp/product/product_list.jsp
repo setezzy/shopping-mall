@@ -11,7 +11,7 @@
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/layouts/header.jsp" />
 <jsp:include page="/WEB-INF/jsp/common/site_header.jsp" />
 
 <c:if test="${not empty category}">
