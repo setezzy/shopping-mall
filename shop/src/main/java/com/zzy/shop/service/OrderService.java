@@ -31,6 +31,8 @@ public interface OrderService {
     // 显示个人订单
     List<OrderVO> getPageOrderByUserId(Integer uid, Integer page, Integer limit);
 
+    List<OrderVO> getByOrderState(Integer ostate, Integer uid, Integer page, Integer limit);
+
     // 根据订单号查询订单
     OrderVO getOrderByOrderNumber(Long onumber);
 

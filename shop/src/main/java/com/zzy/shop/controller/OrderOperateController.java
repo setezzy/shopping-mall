@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 @Controller
 @RequestMapping("/uc/order")
@@ -24,16 +27,22 @@ public class OrderOperateController {
 
     @RequestMapping("/list")
     public String orderUI(HttpSession session, HttpServletRequest request,
-                          // @RequestParam("ostate") Integer ostate,
+                          @RequestParam(value="ostate", required=false, defaultValue = "0") Integer ostate,
                           @RequestParam(value="page", required=false, defaultValue="1") Integer page,
                           @RequestParam(value="limit", required = false, defaultValue = "8") Integer limit){
 
         User user = (User) session.getAttribute("user");
 
-        // if ostate=0 :
-        List<OrderVO> orderVOList = orderServiceImpl.getPageOrderByUserId(user.getUid(), page, limit);
-        // else:
-        // selectByOrderState
+        List<OrderVO> orderVOList;
+
+        Integer uid = user.getUid();
+
+        if(ostate == 0){
+            orderVOList = orderServiceImpl.getPageOrderByUserId(uid, page, limit);
+        }
+        else {
+            orderVOList = orderServiceImpl.getByOrderState(ostate, uid, page, limit);
+        }
 
         PageInfo pageInfo = new PageInfo(page.intValue(), limit.intValue(), "", "");
         pageInfo.setTotal((int)orderServiceImpl.getL().getTotal());

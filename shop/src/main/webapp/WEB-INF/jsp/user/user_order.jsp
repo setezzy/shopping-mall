@@ -69,10 +69,10 @@
                     <div class="more clearfix">
                         <ul class="filter-list">
                             <li class="first ${orderVO.ostate eq 0 ? 'active':''}"><a href="${zzy}/uc/order/list?ostate=0" data-type="0">全部有效订单</a></li>
-                            <li class="${orderVO.ostate eq 1 ? 'active':''}"><a id="J_unpaidTab" href="${zzy}/uc/order/list?ostate=1" data-type="1">已提交</a></li>
-                            <li class="${orderVO.ostate eq 2 ? 'active':''}"><a id="J_sendTab" href="${zzy}/uc/order/list?ostate=2" data-type="2">待收货</a></li>
-                            <li class="${orderVO.ostate eq 3 ? 'active':''}"><a href="${zzy}/uc/order/list?ostate=3" data-type="3">已拒绝</a></li>
-                            <li class="${orderVO.ostate eq 4 ? 'active':''}"><a href="${zzy}/uc/order/list?ostate=4" data-type="4">已关闭</a></li>
+                            <li class="first ${orderVO.ostate eq 1 ? 'active':''}"><a id="J_unpaidTab" href="${zzy}/uc/order/list?ostate=1" data-type="1">已提交</a></li>
+                            <li class="first ${orderVO.ostate eq 2 ? 'active':''}"><a id="J_sendTab" href="${zzy}/uc/order/list?ostate=2" data-type="2">待收货</a></li>
+                            <li class="first ${orderVO.ostate eq 3 ? 'active':''}"><a href="${zzy}/uc/order/list?ostate=3" data-type="3">已拒绝</a></li>
+                            <li class="first ${orderVO.ostate eq 4 ? 'active':''}"><a href="${zzy}/uc/order/list?ostate=4" data-type="4">已关闭</a></li>
                         </ul>
                         <form id="J_orderSearchForm" class="search-form clearfix" action="" method="get">
                             <label for="J_orderSearchKeywords" class="hide">搜索</label>

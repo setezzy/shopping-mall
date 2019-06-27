@@ -90,6 +90,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderVO> getByOrderState(Integer ostate, Integer uid, Integer page, Integer limit){
+        PageHelper.startPage(page, limit);
+        List<OrderVO> list = orderMapper.selectByOrderState(ostate, uid);
+        this.l = (Page<OrderVO>)list;
+        return list;
+    }
+
+    @Override
     public OrderVO getOrderByOrderNumber(Long onumber){
         OrderVO orderVO = orderMapper.selectOrderVOByOrderNumber(onumber);
         return orderVO;

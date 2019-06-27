@@ -94,7 +94,7 @@
         </c:forEach>
       </ul>
     </div>
-    <div class="header-search"> <span class="zySearch" id="zySearch"></span> </div>
+    <div class="header-search"> <a class="zySearch" id="zySearch" href="${zzy}/search"></a> </div>
   </div>
 </div>
 
