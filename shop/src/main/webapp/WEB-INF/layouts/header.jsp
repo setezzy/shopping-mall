@@ -16,7 +16,13 @@
                 </c:if>
 
                 <c:if test="${user.state==1}">
-                    <div class="topbar-info" id="J_userInfo"><span class="user"><a rel="nofollow" class="user-name" href="" target="_blank"><span class="name">${user.uname}</span>&nbsp;&nbsp;<i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <div class="topbar-info" id="J_userInfo">
+                        <span class="user">
+                            <a rel="nofollow" class="user-name" href="" target="_blank">
+                              <span class="name">${user.uname}</span>&nbsp;&nbsp;
+                              <i class="glyphicon glyphicon-chevron-down"></i>
+                            </a>
+
                          <ul class="user-menu" style="display: none;">
                             <li><a rel="nofollow" href="/shop_war_exploded/uc/user/portal" target="_blank">个人中心</a></li>
                             <li><a rel="nofollow" href="/shop_war_exploded//uc/order/list" target="_blank">我的订单</a></li>

@@ -9,6 +9,18 @@
   <sql id="Base_Column_List">
     rmid, rid, mid
   </sql>
+  <insert id="insertRoleMenus" parameterType="java.util.List">
+    insert into role_menu(
+      rid, mid
+    )
+    values (
+     <foreach collection="roleMenus" item="roleMenu" separator=",">
+       #{roleMenu.rid},
+       #{roleMenu.id}
+     </foreach>
+    )
+  </insert>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

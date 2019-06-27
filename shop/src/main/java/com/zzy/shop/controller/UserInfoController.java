@@ -1,6 +1,7 @@
 package com.zzy.shop.controller;
 
 import com.zzy.shop.serviceimpl.AddressServiceImpl;
+import com.zzy.shop.serviceimpl.OrderServiceImpl;
 import com.zzy.shop.serviceimpl.UserServiceImpl;
 import com.zzy.shop.util.Result;
 import com.zzy.shop.po.Address;
@@ -9,6 +10,7 @@ import com.zzy.shop.po.Product;
 import com.zzy.shop.po.User;
 
 import com.zzy.shop.vo.AddressVO;
+import com.zzy.shop.vo.OrderVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -30,9 +32,33 @@ public class UserInfoController {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
+    @Autowired
+    private OrderServiceImpl orderServiceImpl;
+
     // GET 个人中心
-    @RequestMapping("/portal")
-    public String portal(){
+    //@RequestMapping("/portal")
+    //public String portal(){
+    //    return "/user/user_portal";
+    //}
+
+    @RequestMapping(value="portal")
+    public String orderNum(HttpSession session, HttpServletRequest request){
+        User user = (User) session.getAttribute("user");
+        Integer uid = user.getUid();
+        List<OrderVO> orderVOList1;
+        orderVOList1 = orderServiceImpl.getByOrderState(1, uid, 1, 8);
+        List<OrderVO> orderVOList2;
+        orderVOList2 = orderServiceImpl.getByOrderState(2, uid, 1, 8);
+        List<OrderVO> orderVOList3;
+        orderVOList3 = orderServiceImpl.getByOrderState(3, uid, 1, 8);
+        List<OrderVO> orderVOList4;
+        orderVOList4 = orderServiceImpl.getByOrderState(4, uid, 1, 8);
+
+        request.setAttribute("num1", orderVOList1.size());
+        request.setAttribute("num2", orderVOList2.size());
+        request.setAttribute("num3", orderVOList3.size());
+        request.setAttribute("num4", orderVOList4.size());
+
         return "/user/user_portal";
     }
 
@@ -51,6 +77,9 @@ public class UserInfoController {
         User user = (User) session.getAttribute("user");
         if(! password.equalsIgnoreCase(user.getPassword())){
             return new Result(0, "原密码错误");
+        }
+        else if(passwordNew == "" || passwordNew == null){
+            return new Result(0, "请输入新密码");
         }
         else{
             user.setPassword(passwordNew);

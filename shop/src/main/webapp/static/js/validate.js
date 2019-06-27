@@ -571,7 +571,7 @@ $(function() {
 
 
 /**
- * 登陆页面按钮栏控制
+ * 普通用户登陆页面按钮栏控制
  */
 $(function() {
 	$("#btn_login").on('click', function() {
@@ -606,6 +606,43 @@ $(function() {
 		})
 	});
 });
+
+
+/**
+ * 管理员登录
+ */
+$(function() {
+	$("#btn_login_admin").on('click', function() {
+		if (!verifyCheck._click()) return;
+		password = $("#password").val();
+		uname = $("#uname").val();
+		vcode = $("#vcode").val();
+		if (password.length != 256) {
+			//var publicKey = RSAUtils.getKeyPair(exponent, '', modulus);
+			//loginPassword = RSAUtils.encryptedString(publicKey, loginPassword);
+		}
+		$.ajax({
+			type : "POST",
+			url : baselocation + '/admin/login',
+			data : {
+				"uname" : uname,
+				"password" : password,
+				"vcode": vcode
+			},
+			dataType : "json",
+			success : function(result) {
+				if (result.code == 1) {
+					$(".message").hide();
+					window.location.href = baselocation + '/admin/index';
+				} else {
+					$(".message").show();
+					$(".message").children("label").text(result.message);
+				}
+			}
+		})
+	});
+});
+
 
 /**
  * 验证码更改
@@ -748,6 +785,14 @@ $(function() {
         	return false;
         }
     });
+
+	$(".loginPage").keypress(function(e) {
+		var key = window.event ? e.keyCode : e.which;
+		if (key.toString() == "13") {
+			$("#btn_login_admin").trigger("click");
+			return false;
+		}
+	});
 
     // 找回密码按钮
     $(".btn_Pswpart1").keypress(function(e) {

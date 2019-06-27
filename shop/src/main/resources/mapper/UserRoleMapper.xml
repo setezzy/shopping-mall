@@ -9,6 +9,33 @@
   <sql id="Base_Column_List">
     urid, uid, rid
   </sql>
+  <insert id="insertUserRoles" parameterType="java.util.List">
+    insert into user_role(
+      rid, uid
+    )values
+    <foreach collection="userRoles" item="userRole" separator=",">
+      #{userRole.rid},
+      #{userRole.uid}
+    </foreach>
+  </insert>
+
+  <select id="listByUserId" resultType="com.zzy.shop.po.Role">
+     select
+       rid, rname
+     from user_role
+     left join role on role.rid = user_role.rid
+     <where>
+       1=1
+       <if test="uid != null">
+       and uid = #{uid, jdbcType=INTEGER}
+       </if>
+       <if test="state != null">
+       and state = #{state, jdbcType=INTEGER}
+       </if>
+     </where>
+
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

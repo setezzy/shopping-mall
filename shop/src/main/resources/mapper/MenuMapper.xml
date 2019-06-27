@@ -13,6 +13,29 @@
   <sql id="Base_Column_List">
     mid, mname, mtype, parentid, state, href, permission
   </sql>
+  <select id="listByType" resultType="com.zzy.shop.po.Menu">
+    select
+    <include refid="Base_Column_List" />
+    from menu
+    where mtype = #{mtype, jdbcType=INTEGER}
+  </select>
+  <update id="updateStateByIds">
+    update menu
+    set state = #{state}
+    where mid in
+      <foreach collection="mids" item="mid" open="(" close=")" separator=",">
+         #{mid}
+      </foreach>
+  </update>
+  <delete id="deleteRoleMenus">
+     delete
+     from
+       role_menu
+     where mid in
+       <foreach collection="mids" item="mid" open="(" close=")" separator=",">
+         #{mid}
+       </foreach>
+  </delete>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

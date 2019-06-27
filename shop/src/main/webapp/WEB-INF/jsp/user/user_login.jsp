@@ -16,7 +16,7 @@
             <li class="link-line">|</li>
             <li><a href="${zzy}/login">用户登录</a></li>
             <li class="link-line">|</li>
-            <li><a href="${zzy}/admin">后台管理</a></li>
+            <li><a href="${zzy}/admin/login">后台管理</a></li>
         </ul>
     </div>
     <div class="main">

@@ -9,6 +9,20 @@
   <sql id="Base_Column_List">
     rid, rname, state
   </sql>
+  <select id="listByPage" resultType="com.zzy.shop.po.Role">
+    select
+      rid, rname, state
+    from role
+    <where>
+       1=1
+       <if test="search != null">
+         and rname like '%' #{search} '%'
+       </if>
+       <if test="pageInfo.sort != null">
+         order by ${pageInfo.sort} ${pageInfo.order}
+       </if>
+    </where>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
