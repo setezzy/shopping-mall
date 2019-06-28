@@ -16,9 +16,13 @@ public interface ProductMapper {
 
     Product selectByProductNumber(Integer pnumber);
 
+    Product selectByProductName(String pname);
+
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    int selectMaxByProductId(Integer pid);
 
     List<Product> selectAll();
 

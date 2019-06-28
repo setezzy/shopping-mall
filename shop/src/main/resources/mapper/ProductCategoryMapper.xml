@@ -19,6 +19,10 @@
     delete from product_category
     where pcid = #{pcid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByProductId" parameterType="java.lang.Integer">
+    delete from product_category
+    where pid = #{pid, jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.ProductCategory">
     insert into product_category (pcid, pid, cid
       )

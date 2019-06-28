@@ -2,9 +2,7 @@ package com.zzy.shop.controller;
 
 import com.zzy.shop.po.Admin;
 import com.zzy.shop.util.Result;
-import com.zzy.shop.po.User;
 import com.zzy.shop.serviceimpl.AdminServiceImpl;
-import com.zzy.shop.serviceimpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

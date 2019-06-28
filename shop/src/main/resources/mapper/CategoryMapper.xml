@@ -31,6 +31,11 @@
     from category
     where cid = #{cid,jdbcType=INTEGER}
   </select>
+  <select id="selectIdByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select cid
+    from category
+    where cname = #{cname, jdbcType=VARCHAR}
+  </select>
   <select id="selectParentCategoryByProductId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select distinct
         c2.cid,

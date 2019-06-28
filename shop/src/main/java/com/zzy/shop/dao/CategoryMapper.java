@@ -18,6 +18,8 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(Category record);
 
+    int selectIdByName(String cname);
+
     // 查找目录和目录下的商品
     List<CategoryVO> selectIndexCategory();
 

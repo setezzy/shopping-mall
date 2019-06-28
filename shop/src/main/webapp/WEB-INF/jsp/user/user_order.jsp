@@ -217,7 +217,7 @@
                                                     <td class="order-items"><ul class="goods-list">
                                                         <c:forEach items="${orderVO.orderProducts}" var="orderProduct">
                                                             <li>
-                                                                <div class="figure figure-thumb"> <a href="${zzy}/detail/${orderProduct.pnumber}" target="_blank"> <img src="${zzyimg}/${orderProduct.image}" width="60" height="60" alt="${orderProduct.pname}" title="${orderProduct.name}"> </a> </div>
+                                                                <div class="figure figure-thumb"> <a href="${zzy}/detail/${orderProduct.pnumber}" target="_blank"> <img src="${zzyimg}/${orderProduct.image}" width="60" height="60" alt="${orderProduct.pname}" title="${orderProduct.pname}"> </a> </div>
                                                                 <p class="name"> <a target="_blank" href="${zzy}/detail/${orderProduct.pnumber}">${orderProduct.pname}</a> </p>
                                                                 <p class="price">${orderProduct.price}元 × ${orderProduct.buyNumber}</p>
                                                             </li>

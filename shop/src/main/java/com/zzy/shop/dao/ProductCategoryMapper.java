@@ -14,4 +14,6 @@ public interface ProductCategoryMapper {
     int updateByPrimaryKeySelective(ProductCategory record);
 
     int updateByPrimaryKey(ProductCategory record);
+
+    int deleteByProductId(Integer pid);
 }

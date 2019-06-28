@@ -1,32 +1,33 @@
 package com.zzy.shop.serviceimpl;
 
-import java.util.*;
-
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-
-import com.zzy.shop.po.Product;
-import com.zzy.shop.po.Category;
 import com.zzy.shop.dao.CategoryMapper;
-import com.zzy.shop.dao.ProductMapper;
 import com.zzy.shop.dao.ProductCategoryMapper;
-import com.zzy.shop.service.CategoryService;
-import com.zzy.shop.serviceimpl.CategoryServiceImpl;
-import com.zzy.shop.service.ProductService;
+import com.zzy.shop.dao.ProductMapper;
+import com.zzy.shop.po.Category;
+import com.zzy.shop.po.Product;
+import com.zzy.shop.po.ProductCategory;
+import com.zzy.shop.service.AdminProductService;
+import com.zzy.shop.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class AdminProductServiceImpl implements AdminProductService {
+
     @Autowired
     private ProductMapper productMapper;
     @Autowired
     private ProductCategoryMapper productCategoryMapper;
     @Autowired
-    private CategoryMapper categoryMapper;
-    @Autowired
     private CategoryServiceImpl categoryServiceImpl;
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     private Page<Product> l ;
 
@@ -37,6 +38,44 @@ public class ProductServiceImpl implements ProductService{
     public void setL(Page<Product> l) {
         this.l = l;
     }
+
+    @Override
+    public int deleteProduct(Integer pid){
+        int count1 = productMapper.deleteByPrimaryKey(pid);
+        int count2 = productCategoryMapper.deleteByProductId(pid);
+        return count1&count2;
+    }
+
+    @Override
+    public int updateProduct(Product product){
+        int count = productMapper.updateByPrimaryKeySelective(product);
+        return count;
+    }
+
+    @Override
+    public int insertProduct(Product product){
+        productMapper.insertSelective(product);
+        Product product2 = productMapper.selectByProductName(product.getPname());
+        return product2.getPid();
+    }
+
+    @Override
+    public int insertCategory(ProductCategory productCategory){
+        int count = productCategoryMapper.insertSelective(productCategory);
+        return count;
+    }
+
+    @Override
+    public int selectMaxNumber(Integer pid){
+        int pnumber = productMapper.selectMaxByProductId(pid);
+        return pnumber;
+    }
+
+    public int selectIdByName(String cname){
+        int cid = categoryMapper.selectIdByName(cname);
+        return cid;
+    }
+
 
     /**
      * 查询商品详情
@@ -51,9 +90,9 @@ public class ProductServiceImpl implements ProductService{
      * 分页查询商品信息
      */
     @Override
-    public List<Product> pageProductInfo(Integer cid, Integer sort, Integer page, Integer limit){
+    public List<Product> pageProductInfo(Integer cid, Integer page, Integer limit){
         if(cid==1){
-            PageHelper.startPage(page, 8);
+            PageHelper.startPage(page, 11);
             List<Product> plist = productMapper.selectAll();
             this. l = (Page<Product>)plist;
             return plist;
@@ -76,5 +115,4 @@ public class ProductServiceImpl implements ProductService{
         this. l = (Page<Product>)plist;
         return plist;
     }
-
 }
