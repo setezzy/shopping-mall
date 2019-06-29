@@ -65,6 +65,10 @@ public class OrderController {
     public Object confirm(Order order, @RequestParam(value = "addrid") Integer addrid, HttpSession session) {
         User user = (User) session.getAttribute("user");
         Product product =  (Product) session.getAttribute("product");
+        if(user == null){
+            return new Result(0, "您还没有登录");
+        }
+
         // 收货地址
         Address address = addressServiceImpl.getAddress(addrid);
         if(address!=null) {
@@ -81,26 +85,39 @@ public class OrderController {
             Integer oid = orderServiceImpl.saveOrder(order);
             order.setOid(oid);
 
-            //保存订单商品
-            OrderProduct orderProduct = new OrderProduct();
-            orderProduct.setOid(oid);
-            orderProduct.setPnumber(product.getPnumber());
-            orderProduct.setPname(product.getPname());
-            orderProduct.setImage(product.getImage());
+            Integer available = product.getAmount();
+            if(available >= 1){
+                //减商品库存
+                int count = orderServiceImpl.updateProductStock(product.getPid());
+                if(count==1){
+                    //保存订单商品
+                    OrderProduct orderProduct = new OrderProduct();
+                    orderProduct.setOid(oid);
+                    orderProduct.setPnumber(product.getPnumber());
+                    orderProduct.setPname(product.getPname());
+                    orderProduct.setImage(product.getImage());
 
-            orderProduct.setPrice(product.getPrice());
-            orderServiceImpl.saveOrderProduct(orderProduct);
+                    orderProduct.setPrice(product.getPrice());
+                    orderServiceImpl.saveOrderProduct(orderProduct);
 
-            //保存订单配送收货地址
-            OrderShipment orderShipment = new OrderShipment();
-            orderShipment.setOid(oid);
-            BeanUtils.copyProperties(address, orderShipment);
-            orderServiceImpl.saveOrderShipment(orderShipment);
-            //保存订单状态
-            OrderState orderState = new OrderState();
-            orderState.setOid(oid);
-            orderState.setOstate(new Integer("1"));
-            orderServiceImpl.saveOrderState(orderState);
+                    //保存订单配送收货地址
+                    OrderShipment orderShipment = new OrderShipment();
+                    orderShipment.setOid(oid);
+                    BeanUtils.copyProperties(address, orderShipment);
+                    orderServiceImpl.saveOrderShipment(orderShipment);
+
+                    //保存订单状态
+                    OrderState orderState = new OrderState();
+                    orderState.setOid(oid);
+                    orderState.setOstate(new Integer("1"));
+                    orderServiceImpl.saveOrderState(orderState);
+                }else{
+                    return new Result(0, "商品库存不足");
+                }
+            }else{
+                return new Result(0,"商品库存不足");
+            }
+
             return new Result(1, String.valueOf(num));
         }
         return null;

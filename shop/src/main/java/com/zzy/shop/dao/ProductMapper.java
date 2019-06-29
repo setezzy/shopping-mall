@@ -24,6 +24,8 @@ public interface ProductMapper {
 
     int selectMaxByProductId(Integer pid);
 
+    int updateStockById(Integer pid);
+
     List<Product> selectAll();
 
     List<Product> listByPage(@Param("cids" + "") List<String> cids);

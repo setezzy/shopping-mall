@@ -25,6 +25,9 @@ public interface OrderService {
     // 由订单编号获取商品
     List<OrderProduct> getProductsByOrderId(Integer oid);
 
+    // 由商品id更新库存
+    int updateProductStock(Integer pid);
+
     // 由订单编号获取地址
     OrderShipment getShipmentByOrderId(Integer oid);
 

@@ -33,20 +33,20 @@ $(function() {
  */
 $(function() {
 	$('#J_cancelOrder').on("click", function() {
-		var orderNumber = $('#J_cancelOrder').attr('data-order-id');
+		var onumber = $('#J_cancelOrder').attr('data-order-id');
 		layer.confirm('你真的要取消此订单吗?', {
-			btn : [ '确定', '取消' ] //按钮
+			btn : [ '确定', '取消' ]
 		}, function() {
 			$.ajax({
 				type : 'put',
 				dataType : 'json',
 				url : baselocation + '/order/cancelOrder',
 				data : {
-					'orderNumber' : orderNumber
+					'onumber' : onumber
 				},
 				success : function(result) {
 					if (result.code == 1) {
-						window.location.reload(); //刷新当前页面.
+						window.location.reload();
 					} else {
 						layer.alert(result.message, {
 							icon : 2

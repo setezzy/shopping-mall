@@ -24,7 +24,7 @@
                 <div class="order-info clearfix">
                     <div class="fl">
                         <h2 class="title">订单提交成功!</h2>
-                        <p class="order-time" id="J_deliverDesc">我们将尽快为您发货</p>
+                        <p class="order-time" id="J_deliverDesc">我们将尽快处理</p>
                         <p class="post-info" id="J_postInfo"> 收货信息：${orderShipment.uname} ${orderShipment.phone}&nbsp;&nbsp;
                             &nbsp;&nbsp;${orderShipment.address} </p>
                     </div>

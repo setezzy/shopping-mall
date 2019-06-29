@@ -48,14 +48,7 @@ $(function() {
 		var params = {};
 
 		params.addrid = $("#J_addressList").find(".selected").attr('data-address_id');
-		/*
-		params.payType = $(".section-payment").find(".selected").attr('data-value');
-		params.shipmentType = $(".section-shipment").find(".selected").attr('data-value');
-		params.shipmentAmount = $(".section-shipment").find(".selected").attr('data-amount');
-		params.shipmentTime = $(".section-time").find(".selected").attr('data-value');
-		params.invoiceType = $(".section-invoice").find(".selected").attr('data-value');
-		params.invoiceTitle = $("#invoice_title").val();
-		 */
+
 		console.log(params);
 		$.ajax({
 			url : baselocation + '/buy/confirm',

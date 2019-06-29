@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.zzy.shop.po.*;
 import com.zzy.shop.service.OrderService;
 import com.zzy.shop.dao.OrderMapper;
+import com.zzy.shop.dao.ProductMapper;
 import com.zzy.shop.dao.OrderProductMapper;
 import com.zzy.shop.dao.OrderStateMapper;
 import com.zzy.shop.dao.OrderShipmentMapper;
@@ -27,6 +28,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderShipmentMapper orderShipmentMapper;
     @Autowired
     private OrderStateMapper orderStateMapper;
+    @Autowired
+    private ProductMapper productMapper;
+
 
     @Override
     public Integer saveOrder(Order order){
@@ -47,6 +51,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrderState(OrderState orderState){
         orderStateMapper.insertSelective(orderState);
+    }
+
+    @Override
+    public int updateProductStock(Integer pid){
+        int count = productMapper.updateStockById(pid);
+        return count;
     }
 
     @Override
