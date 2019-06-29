@@ -7,10 +7,19 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
+  <resultMap id="UserVOResultMap" type="com.zzy.shop.vo.UserVO">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+  </resultMap>
   <sql id="Base_Column_List">
     uid, uname, password, state
   </sql>
-
+  <select id="selectAll" parameterType="com.zzy.shop.vo.UserVO" resultMap="UserVOResultMap">
+    select admin.*
+    from admin left join user_role
+    on admin.uid = user_role.uid
+    where user_role.rid = #{rid, jdbcType=INTEGER}
+  </select>
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
    select
    <include refid="Base_Column_List" />

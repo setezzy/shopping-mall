@@ -5,6 +5,8 @@ import com.zzy.shop.po.OrderShipment;
 public interface OrderShipmentMapper {
     int deleteByPrimaryKey(Integer oshid);
 
+    int deleteByOrderId(Integer oid);
+
     int insert(OrderShipment record);
 
     int insertSelective(OrderShipment record);

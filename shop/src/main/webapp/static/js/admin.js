@@ -2,6 +2,156 @@ function setMsg(a, b) {
     a && b ? a.siblings(".tipMsg").html(b).show() : a.siblings(".tipMsg").html("").hide()
 }
 
+/**
+ * 权限验证
+ */
+function check_admin() {
+    $.ajax({
+        type: "POST",
+        url: baselocation + '/admin/user',
+        data: null,
+        dataType: "json",
+        success: function (result) {
+            if (result.code == 1) {
+                window.location.href = baselocation + '/admin/user/list';
+            } else {
+                layer.alert(result.message, {
+                    icon: 2
+                });
+            }
+        }
+    })
+}
+
+/**
+ * 删除用户
+ */
+function user_delete(obj, data) {
+    layer.confirm('确认要删除吗？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            type : 'delete',
+            dataType : 'json',
+            url : baselocation + '/admin/user/delete/' + data,
+            success : function(result) {
+                if (result.code == 1) {
+                    $(obj).parent().parent("div").remove();
+                    layer.msg('已删除!', {
+                        icon : 1,
+                        time : 1000
+                    });
+                } else {
+                    layer.alert(result.message, {
+                        icon : 2
+                    });
+                }
+            }
+        })
+    });
+}
+
+/**
+ * 新增用户
+ */
+$(function(){
+    $("#user_save").click(function(){
+        var uname = $("#new_uname"),
+            password = $("#new_psw"),
+            v = !1,
+            para = {};
+        var nu = $.trim(uname.val()),
+            Nu = uname.attr("placeholder");
+        if(nu === Nu && (nu = "")) return uname.focus(), setMsg(uname, "请输入用户名"), !1;
+        setMsg(uname, ""), para.uname=nu, v=!0;
+        var pn = $.trim(password.val()),
+            N = password.attr("placeholder"),
+            a = !1;
+        if(pn === N && (pn = "")) return new_psw.focus(), setMsg(new_psw, "请输入新密码"), !1;
+        setMsg(password, ""), para.password=pn, a=!0;
+
+        saveUser(para), resetUser();
+    })
+})
+
+function saveUser(para){
+    $.ajax({
+        type: "POST",
+        url: baselocation + '/admin/user/update',
+        data: para,
+        dataType: "json",
+        success: function(result){
+            if(result.code == 1){
+                layer.alert(result.message);
+            }
+            else{
+                layer.alert(result.message, {
+                    icon: 2
+                });
+            }
+        },
+        error: function (result) {
+            layer.alert(result.message, {
+                icon : 2
+            });
+        }
+
+    });
+}
+
+function resetUser(){
+    $("#new_uname").val(""),
+        $("#new_psw").val(""),
+        $(".tipMsg").html("").hide();
+}
+
+
+$(function(){
+    $("#user_cancel").click(function(){
+        resetUser();
+    })
+
+
+})
+
+
+/**
+ * 修改用户角色
+ */
+$(function () {
+    $("#user_modify").on('click', function(){
+        var rid = $("#admin_role").val(),
+            uid = $("#user_modify").attr("user-id"),
+            r = {};
+        r.rid = rid;
+        r.uid = uid;
+        $.ajax({
+            type : 'post',
+            dataType : 'json',
+            data: r,
+            url : baselocation + '/admin/user/modifyUser',
+            success : function(result) {
+                if (result.code == 1) {
+                    layer.msg('修改成功!', {
+                        icon : 1,
+                        time : 1000
+                    });
+                } else {
+                    layer.alert(result.message, {
+                        icon : 2
+                    });
+                }
+            }
+        })
+    })
+})
+
+
+
+
+/**
+ *新建商品
+ */
 $(function() {
     $("#J_newProduct").on('click', function() {
         resetData();
@@ -69,7 +219,6 @@ $(function() {
         r.pid = Z;
         pc.pid = Z;
 
-        //var ca = $("#productInfo").attr("product-cate");
         var ca = $("#child_category").val();
         r.cid= ca;
 

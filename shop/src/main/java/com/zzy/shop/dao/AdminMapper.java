@@ -3,6 +3,7 @@ package com.zzy.shop.dao;
 import com.github.pagehelper.Page;
 import com.zzy.shop.po.Admin;
 import com.zzy.shop.util.PageInfo;
+import com.zzy.shop.vo.UserVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface AdminMapper {
     int updateByPrimaryKey(Admin record);
 
     Admin selectByName(String uname);
+
+    List<UserVO> selectAll(Integer rid);
 
 }

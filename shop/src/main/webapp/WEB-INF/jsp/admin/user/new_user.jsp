@@ -2,16 +2,16 @@
 <%@ include file="/WEB-INF/layouts/base.jsp"%>
 <html>
 <head>
-    <title>后台管理系统</title>
-    <link rel="stylesheet" href="${zzysta}/css/list.css" />
+    <title>添加用户</title>
+    <link rel="stylesheet" href="${zzysta}/css/address.css">
+    <link rel="stylesheet" href="${zzysta}/css/select2.css" />
     <link rel="stylesheet" href="${zzysta}/css/base.css" />
     <link rel="stylesheet" href="${zzysta}/css/main.css" />
+    <link rel="stylesheet" href="${zzysta}/css/list.css" />
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
 </head>
 <body>
-
 <jsp:include page="/WEB-INF/layouts/admin_header.jsp" />
-
 <div class="page-main user-main">
     <div class="container-fluid">
         <div class="row">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="javascript:void(0);" id="admin_user" onclick="check_admin()">用户</a></li>
+                                <li><a id="admin_user" href="${zzy}/admin/user/list">用户</a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,36 +54,44 @@
     </div>
 
     <div class="span16">
-        <div class="uc-box uc-main-box">
-            <div class="uc-content-box">
-                    <div class="portal-main clearfix">
-                        <div class="user-card">
-                            <h2 class="username">Hi, ${sessionScope.admin.uname}</h2>
-                            <p></p>
-                            <p></p>
-                            <h2 class="username">欢迎来到网上商城后台管理系统</h2>
-                        </div>
-                    </div>
+    <div class="uc-box uc-main-box">
+        <div class="uc-content-box">
+            <div class="box-main">
+                <div class="form-section">
+                    <input class="input-text J_addressInput" type="text" id="new_uname" name="new_uname" placeholder="用户名">
+                    <p class="tip-msg tipMsg"></p>
+                </div>
+                <div class="form-section">
+                    <input class="input-text J_addressInput" type="text" id="new_psw" name="new_psw" placeholder="密码">
+                    <p class="tip-msg tipMsg"></p>
+                </div>
+            </div>
+            <div class="form-confirm clearfix">
+                <div class="btn btn-primary" id="user_save" name="user_save">保存</div>
+                <div class="btn btn-gray" id="user_cancel" name="user_cancel">取消</div>
             </div>
         </div>
     </div>
-
+    </div>
 </div>
 
-
 <footer>
-<script src="${zzysta}/common/jquery/jquery-3.2.0.min.js"></script>
-<script src="${zzysta}/common/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="${zzysta}/js/zySearch.js"></script>
-<script src="${zzysta}/js/jump.js"></script>
-<script src="${zzysta}/js/base.js"></script>
-<script src="${zzysta}/js/main.js"></script>
-<script src="${zzysta}/js/list.js"></script>
-<script src="${zzysta}/js/myapp.js"></script>
+    <script src="${zzysta}/common/jquery/jquery-3.2.0.min.js"></script>
+    <script src="${zzysta}/common/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="${zzysta}/js/admin.js"></script>
-<script src="${zzysta}/common/layer/layer.js"></script>
+    <script src="${zzysta}/js/admin.js"></script>
+    <script src="${zzysta}/js/jump.js"></script>
+    <script src="${zzysta}/js/base.js"></script>
+    <script src="${zzysta}/js/main.js"></script>
+    <script src="${zzysta}/js/list.js"></script>
+    <script src="${zzysta}/js/myapp.js"></script>
+
+    <script src="${zzysta}/common/layer/layer.js"></script>
+    <!-- 分页js -->
+    <script src="${zzysta}/common/pager/jquery.pager.js"></script>
+
 </footer>
+
 </body>
 </html>

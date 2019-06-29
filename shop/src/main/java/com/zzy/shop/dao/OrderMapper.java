@@ -9,6 +9,8 @@ import java.util.List;
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer oid);
 
+
+
     int insert(Order record);
 
     int insertSelective(Order record);

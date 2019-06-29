@@ -9,27 +9,37 @@
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
+  <resultMap id="UserVOResultMap" type="com.zzy.shop.vo.UserVO">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
   <sql id="Base_Column_List">
     uid, uname, password, phone, address, state
   </sql>
+  <select id="selectAll" parameterType="com.zzy.shop.vo.UserVO" resultMap="UserVOResultMap">
+    select u.*
+    from users u
+  </select>
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from user
+    from users
     where uname = #{uname, jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from users
     where uid = #{uid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from users
     where uid = #{uid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.User">
-    insert into user (uid, uname, password, 
+    insert into users (uid, uname, password,
       phone, address, state
       )
     values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
@@ -37,7 +47,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zzy.shop.po.User">
-    insert into user
+    insert into users
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
         uid,
@@ -80,7 +90,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zzy.shop.po.User">
-    update user
+    update users
     <set>
       <if test="uname != null">
         uname = #{uname,jdbcType=VARCHAR},
@@ -101,7 +111,7 @@
     where uid = #{uid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zzy.shop.po.User">
-    update user
+    update users
     set uname = #{uname,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},

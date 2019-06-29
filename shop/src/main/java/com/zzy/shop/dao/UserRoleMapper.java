@@ -25,4 +25,9 @@ public interface UserRoleMapper {
     // 根据管理员id查找角色列表
     List<Role> listByUserId(@Param("uid") Integer uid, @Param("state") Integer state);
 
+    // 由管理员id查找角色
+    int selectRoleByUserId(Integer uid);
+
+    int updateRole(UserRole userRole);
+
 }

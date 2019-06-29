@@ -28,6 +28,10 @@
     delete from order_product
     where opid = #{opid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByOrderId" parameterType="java.lang.Integer">
+    delete from order_product
+    where oid = #{oid, jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.OrderProduct">
     insert into order_product (opid, oid, pname, 
       image, price, pnumber

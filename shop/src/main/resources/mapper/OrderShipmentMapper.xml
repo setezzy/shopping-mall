@@ -27,6 +27,10 @@
     delete from order_shipment
     where oshid = #{oshid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByOrderId" parameterType="java.lang.Integer">
+    delete from order_shipment
+    where oid = #{oid, jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.OrderShipment">
     insert into order_shipment (oshid, uname, phone, 
       address, oid)

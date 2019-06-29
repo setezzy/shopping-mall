@@ -20,6 +20,10 @@
     delete from order_state
     where osid = #{osid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByOrderId" parameterType="java.lang.Integer">
+    delete from order_state
+    where oid = #{oid, jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.zzy.shop.po.OrderState">
     insert into order_state (osid, oid, ostate, 
       operate)
