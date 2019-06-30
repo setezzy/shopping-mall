@@ -112,4 +112,29 @@ public class OrderServiceImpl implements OrderService {
         OrderVO orderVO = orderMapper.selectOrderVOByOrderNumber(onumber);
         return orderVO;
     }
+
+    public List<OrderVO> getOrders(Integer page, Integer limit){
+        PageHelper.startPage(page, limit);
+        List<OrderVO> list = orderMapper.selectAll();
+        this.l = (Page<OrderVO>) list;
+        return list;
+    }
+
+    public int updateOrder(Order order){
+        int count = orderMapper.updateByPrimaryKeySelective(order);
+        return count;
+    }
+
+    public int updateOrderState(OrderState orderState){
+        int count = orderStateMapper.updateByOrderId(orderState);
+        return count;
+    }
+
+    public int deleteOrder(Integer oid){
+        int count = orderMapper.deleteByPrimaryKey(oid);
+        orderProductMapper.deleteByOrderId(oid);
+        orderProductMapper.deleteByOrderId(oid);
+        orderStateMapper.deleteByOrderId(oid);
+        return count;
+    }
 }

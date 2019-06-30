@@ -128,8 +128,8 @@
                                     <li class="uc-order-item uc-order-item-shipping">
                                         <div class="order-detail">
                                             <div class="order-summary">
-                                                <div class="order-status">待发货</div>
-                                                <p class="order-desc J_deliverDesc"> 我们将尽快为您发货 </p>
+                                                <div class="order-status">已发货</div>
+                                                <p class="order-desc J_deliverDesc"> 商品正在路上 </p>
                                             </div>
                                             <table class="order-detail-table">
                                                 <thead>
@@ -165,6 +165,7 @@
                                         <div class="order-detail">
                                             <div class="order-summary">
                                                 <div class="order-status">已拒绝</div>
+                                                <p class="order-desc J_deliverDesc"> 抱歉,商家拒绝了该订单 </p>
                                             </div>
                                             <table class="order-detail-table">
                                                 <thead>
@@ -219,7 +220,7 @@
                                                             <li>
                                                                 <div class="figure figure-thumb"> <a href="${zzy}/detail/${orderProduct.pnumber}" target="_blank"> <img src="${zzyimg}/${orderProduct.image}" width="60" height="60" alt="${orderProduct.pname}" title="${orderProduct.pname}"> </a> </div>
                                                                 <p class="name"> <a target="_blank" href="${zzy}/detail/${orderProduct.pnumber}">${orderProduct.pname}</a> </p>
-                                                                <p class="price">${orderProduct.price}元 × ${orderProduct.buyNumber}</p>
+                                                                <p class="price">${orderProduct.price}元 × 1 </p>
                                                             </li>
                                                         </c:forEach>
                                                     </ul></td>

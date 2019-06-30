@@ -4,11 +4,11 @@
 <head>
     <title>商品管理</title>
     <link rel="stylesheet" href="${zzysta}/css/list.css" />
-    <link rel="stylesheet" href="${zzysta}/css/base.css">
+    <link rel="stylesheet" href="${zzysta}/css/base.css" />
     <link rel="stylesheet" href="${zzysta}/css/main.css" />
-    <link rel="stylesheet" href="${zzysta}/css/address.css">
+    <link rel="stylesheet" href="${zzysta}/css/address.css" />
     <link rel="stylesheet" href="${zzysta}/css/select2.css" />
-    <link rel="stylesheet" href="${zzysta}/css/goods-detail.css">
+    <link rel="stylesheet" href="${zzysta}/css/goods-detail.css" />
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
 </head>
 <body>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="${zzy}/admin/order">商城订单</a></li>
+                                <li><a href="${zzy}/admin/orders">商城订单</a></li>
                             </ul>
                         </div>
                     </div>

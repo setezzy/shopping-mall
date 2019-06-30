@@ -32,17 +32,18 @@ $(function() {
  * 取消订单
  */
 $(function() {
-	$('#J_cancelOrder').on("click", function() {
-		var onumber = $('#J_cancelOrder').attr('data-order-id');
+	$('.actions').on("click", '#J_cancelOrder', function() {
+		var oid = $('#J_cancelOrder').attr('data-order-id');
 		layer.confirm('你真的要取消此订单吗?', {
 			btn : [ '确定', '取消' ]
 		}, function() {
 			$.ajax({
-				type : 'put',
+				type : 'post',
 				dataType : 'json',
-				url : baselocation + '/order/cancelOrder',
+				url : baselocation + '/uc/order/cancel',
 				data : {
-					'onumber' : onumber
+					'oid' : oid,
+					'ostate' : 4
 				},
 				success : function(result) {
 					if (result.code == 1) {
@@ -57,6 +58,39 @@ $(function() {
 		});
 	})
 })
+
+
+/**
+ * 关闭订单
+ */
+$(function() {
+	$('.actions').on("click", '#J_closeOrder', function() {
+		var oid = $('#J_closeOrder').attr('data-order-id');
+		layer.confirm('你真的要关闭此订单吗?', {
+			btn : [ '确定', '取消' ]
+		}, function() {
+			$.ajax({
+				type : 'post',
+				dataType : 'json',
+				url : baselocation + '/uc/order/close',
+				data : {
+					'oid' : oid,
+					'ostate' : 4
+				},
+				success : function(result) {
+					if (result.code == 1) {
+						window.location.reload();
+					} else {
+						layer.alert(result.message, {
+							icon : 2
+						});
+					}
+				}
+			})
+		});
+	})
+})
+
 
 /**
  * 选择送货时间

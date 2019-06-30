@@ -196,6 +196,20 @@
     and oo.uid = #{uid, jdbcType=INTEGER}
   </select>
 
+  <select id="selectAll" resultMap="OrderVOResultMap">
+    select
+    oo.oid as oid1, onumber, uid, oo.ostate as ostate1, oo.odate as odate1, oo.oupdate as oupdate1, oprice,
+    opid, oop.oid as oid2, pnumber, pname, image, price,
+    osid, oos.oid as oid3, oos.ostate as ostate3, operate
+    from
+      orders oo,
+      order_product oop,
+      order_state oos
+    where
+      oo.oid = oop.oid
+    and oop.oid = oos.oid
+  </select>
+
   <select id="selectOrderVOByOrderNumber" parameterType="java.lang.Long" resultMap="OrderVOResultMap">
     select
     oo.oid as oid1, onumber, uid, oo.ostate as ostate1, oo.odate as odate1, oo.oupdate as oupdate1, itemamount,

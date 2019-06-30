@@ -41,6 +41,7 @@ function user_delete(obj, data) {
                         icon : 1,
                         time : 1000
                     });
+                    window.location.reload();
                 } else {
                     layer.alert(result.message, {
                         icon : 2
@@ -147,6 +148,87 @@ $(function () {
 })
 
 
+/**
+ * 订单发货
+ */
+function order_admit(oid){
+    $.ajax({
+        type: "POST",
+        url: baselocation + '/admin/orders/admit',
+        data: {
+            "oid": oid,
+            "ostate": 2
+        },
+        dataType: "json",
+        success: function (result) {
+            if (result.code == 1) {
+                window.location.reload();
+            } else {
+                layer.alert(result.message, {
+                    icon: 2
+                });
+            }
+        }
+    })
+}
+
+/**
+ * 订单拒绝
+ */
+function order_refuse(oid){
+    layer.confirm('确认拒绝该订单吗？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            type: "POST",
+            url: baselocation + '/admin/orders/refuse',
+            data: {
+                "oid": oid,
+                "ostate": 3
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 1) {
+                    window.location.reload();
+                } else {
+                    layer.alert(result.message, {
+                        icon: 2
+                    });
+                }
+            }
+        })
+    });
+}
+
+
+/**
+ * 删除订单
+ */
+function order_delete(obj,oid){
+    layer.confirm('确认删除该订单吗？', {
+        btn : ['确定', '取消']
+    }, function(){
+        $.ajax({
+            type: "delete",
+            url: baselocation + '/admin/orders/delete/'+oid,
+            dataType: "json",
+            success: function (result) {
+                if (result.code == 1) {
+                    $(obj).parent().parent("div").remove();
+                    layer.msg('已删除!', {
+                        icon : 1,
+                        time : 1000
+                    });
+                    window.location.reload();
+                } else {
+                    layer.alert(result.message, {
+                        icon: 2
+                    });
+                }
+            }
+        })
+    });
+}
 
 
 /**

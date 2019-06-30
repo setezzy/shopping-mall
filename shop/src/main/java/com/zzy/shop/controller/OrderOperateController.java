@@ -2,14 +2,15 @@ package com.zzy.shop.controller;
 
 import com.zzy.shop.serviceimpl.OrderServiceImpl;
 import com.zzy.shop.po.User;
+import com.zzy.shop.po.Order;
 import com.zzy.shop.vo.OrderVO;
 import com.zzy.shop.util.PageInfo;
 
+import com.zzy.shop.util.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -58,4 +59,27 @@ public class OrderOperateController {
 
         return "/user/user_order_view";
     }
+
+    @RequestMapping(value = "/cancel", method = RequestMethod.POST)
+    @ResponseBody
+    public Object cancelOrder(Order order){
+        int count = orderServiceImpl.updateOrder(order);
+        if(count == 1) {
+            return new Result(1, "取消订单成功");
+        } else {
+            return new Result(0, "取消订单失败");
+        }
+    }
+
+    @RequestMapping(value = "/close", method = RequestMethod.POST)
+    @ResponseBody
+    public Object closeOrder(Order order){
+        int count = orderServiceImpl.updateOrder(order);
+        if(count == 1) {
+            return new Result(1, "关闭订单成功");
+        } else {
+            return new Result(0, "关闭订单失败");
+        }
+    }
+
 }

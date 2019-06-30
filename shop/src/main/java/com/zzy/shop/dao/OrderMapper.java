@@ -27,5 +27,7 @@ public interface OrderMapper {
 
     List<OrderVO> selectByOrderState(@Param("ostate") Integer ostate, @Param("uid") Integer uid);
 
+    List<OrderVO> selectAll();
+
     OrderVO selectOrderVOByOrderNumber(Long onumber);
 }

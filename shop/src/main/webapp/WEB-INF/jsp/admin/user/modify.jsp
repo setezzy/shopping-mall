@@ -45,7 +45,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="${zzy}/admin/order">商城订单</a></li>
+                                <li><a href="${zzy}/admin/orders">商城订单</a></li>
                             </ul>
                         </div>
                     </div>

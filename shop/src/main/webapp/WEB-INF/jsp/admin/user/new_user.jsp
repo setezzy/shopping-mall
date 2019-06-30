@@ -43,7 +43,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="${zzy}/admin/order">商城订单</a></li>
+                                <li><a href="${zzy}/admin/orders">商城订单</a></li>
                             </ul>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
             </div>
             <div class="form-confirm clearfix">
                 <div class="btn btn-primary" id="user_save" name="user_save">保存</div>
-                <div class="btn btn-gray" id="user_cancel" name="user_cancel">取消</div>
+                <a class="btn btn-gray" id="user_cancel" name="user_cancel" href="javascript:history.back(-1)">取消</a>
             </div>
         </div>
     </div>

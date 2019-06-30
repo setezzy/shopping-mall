@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="${zzysta}/css/base.css" />
     <link rel="stylesheet" href="${zzysta}/css/main.css" />
     <link rel="stylesheet" href="${zzysta}/css/list.css" />
+    <link rel="stylesheet" href="${zzysta}/css/goods-detail.css">
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
 </head>
 
@@ -68,10 +69,16 @@
                     <div class="more clearfix">
                         <h2 class="subtitle">订单号：${orderVO.onumber} <span class="tag tag-subsidy"></span> </h2>
                         <div class="actions">
-                            <c:if test="${orderVO.ostate eq 1}"> <a id="J_cancelOrder" class="btn btn-small btn-line-gray" title="取消订单" data-order-id="${orderVO.onumber}" href="javascript:;" data-confirm="你真的要取消此订单吗?">取消订单</a></c:if>
+                            <c:if test="${orderVO.ostate eq 1}">
+                                <a id="J_cancelOrder" name="J_cancelOrder" class="btn btn-small btn-line-gray" title="取消订单" data-order-id="${orderVO.oid}" >取消订单</a>
+                            </c:if>
+                            <c:if test="${orderVO.ostate eq 3}">
+                                <a id="J_closeOrder" name="J_closeOrder" class="btn btn-small btn-line-gray" title="关闭订单" data-order-id="${orderVO.oid}" >关闭订单</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
+
                 <div class="box-bd">
                     <div class="uc-order-item uc-order-item-finish">
                         <div class="order-detail">
@@ -223,6 +230,7 @@
     <script src="${zzysta}/js/myapp.js"></script>
     <script src="${zzysta}/js/address.js"></script>
     <script src="${zzysta}/js/order.js"></script>
+    <script src="${zzysta}/common/pager/jquery.pager.js"></script>
 </footer>
 
 </body>

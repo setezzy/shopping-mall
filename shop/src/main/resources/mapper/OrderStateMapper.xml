@@ -83,4 +83,9 @@
       operate = #{operate,jdbcType=INTEGER}
     where osid = #{osid,jdbcType=INTEGER}
   </update>
+  <update id="updateByOrderId" parameterType="com.zzy.shop.po.OrderState">
+    update order_state
+    set ostate = #{ostate, jdbcType=INTEGER}
+    where oid = #{oid, jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -25,7 +25,7 @@
 
                          <ul class="user-menu" style="display: none;">
                             <li><a rel="nofollow" href="/shop_war_exploded/uc/user/portal" target="_blank">个人中心</a></li>
-                            <li><a rel="nofollow" href="/shop_war_exploded//uc/order/list" target="_blank">我的订单</a></li>
+                            <li><a rel="nofollow" href="/shop_war_exploded/uc/order/list" target="_blank">我的订单</a></li>
                             <li><a rel="nofollow" href="/shop_war_exploded/logout">退出登录</a></li>
                           </ul>
                     </span><span class="sep">|</span><span class="sep">|</span></div>

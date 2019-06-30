@@ -3,11 +3,11 @@
 
 <html>
 <head>
-    <title>用户管理</title>
+    <title>订单管理</title>
     <link rel="stylesheet" href="${zzysta}/css/base.css" />
     <link rel="stylesheet" href="${zzysta}/css/main.css" />
     <link rel="stylesheet" href="${zzysta}/css/list.css" />
-    <link rel="stylesheet" href="${zzysta}/css/address.css">
+    <link rel="stylesheet" href="${zzysta}/css/address.css" />
     <link rel="stylesheet" href="${zzysta}/css/select2.css" />
     <link rel="stylesheet" href="${zzysta}/css/goods-detail.css">
     <script> var t1 = new Date().getTime(); baselocation='${zzy}';</script>
@@ -61,84 +61,79 @@
         <div class="uc-box uc-main-box">
             <div class="uc-content-box">
                 <div class="box-hd">
-                    <h1 class="title">所有用户</h1>
-                    <div class="more clearfix">
-                        <ul class="filter-list">
-                            <li ><a href="${zzy}/admin/user/list?rid=0" data-type="0">普通用户</a></li>
-                            <li ><a id="J_unpaidTab" href="${zzy}/admin/user/list?rid=1" data-type="1">管理员</a></li>
-                            <li ><a id="J_sendTab" href="${zzy}/admin/user/list?rid=2" data-type="2">销售商</a></li>
-                            <li ><a id="new_user" href="${zzy}/admin/user/insert" data-type="3">添加用户</a></li>
-                        </ul>
-                    </div>
+                <h1 class="title">全部订单</h1>
+                    <p></p>
+                    <p></p>
                 </div>
-
                 <table border="1" bordercolor="#c0c0c0">
                     <tr>
-                        <th width="180px">用户id</th>
-                        <th width="180px">用户名</th>
-                        <th width="180px">手机号</th>
+                        <th width="180px">订单编号</th>
+                        <th width="100px">用户id</th>
+                        <th width="100px">订单状态</th>
+                        <th width="100px">订单金额</th>
+                        <th width="180px">下单日期</th>
                         <th width="180px">操作</th>
                     </tr>
-                    <c:forEach items="${userVOList}" var="userVO">
-                        <c:if test="${rid eq 0}">
-                            <tr>
-                                <td>${userVO.uid}</td>
-                                <td>${userVO.uname}</td>
-                                <td>${userVO.phone}</td>
-                                <td><a href="javascript:void(0);" class="modify J_addressDel"  id="J_userDel" onclick="user_delete(this,${userVO.uid})" data-id="${userVO.uid}">删除</a></td>
-                            </tr>
-                        </c:if>
-                        <c:if test="${rid eq 1 || rid eq 2}">
-                            <tr>
-                                <td>${userVO.uid}</td>
-                                <td>${userVO.uname}</td>
-                                <td>${userVO.phone}</td>
-                                <td><div class="actions" id="J_userModify" data-id="${userVO.uid}"> <a href="${zzy}/admin/user/modify?uid=${userVO.uid}" class="modify J_addressDel" role-id="${rid}" data-id="${userVO.uid}">修改</a> </div></td>
-                            </tr>
-
-                        </c:if>
+                    <c:forEach items="${orderVOList}" var="orderVO" >
+                        <div>
+                        <tr>
+                            <td>${orderVO.onumber}</td>
+                            <td>${orderVO.uid}</td>
+                            <td>
+                                <c:if test="${orderVO.ostate == 1}"> 已提交 </c:if>
+                                <c:if test="${orderVO.ostate == 2}"> 已发货 </c:if>
+                                <c:if test="${orderVO.ostate == 3}"> 已拒绝 </c:if>
+                                <c:if test="${orderVO.ostate == 4}"> 已关闭 </c:if>
+                            </td>
+                            <td>${orderVO.oprice}</td>
+                            <td>${orderVO.odate}</td>
+                            <td>
+                                <c:if test="${orderVO.ostate == 1 }">
+                                    <a class="modify J_addressDel"  id="J_orderAdm" href="javascript:void(0);" onclick="order_admit(${orderVO.oid})"> 发货 </a>
+                                    &nbsp;
+                                    <a class="modify J_addressDel"  id="J_orderRef" href="javascript:void(0);" onclick="order_refuse(${orderVO.oid})"> 拒绝 </a>
+                                </c:if>
+                                <c:if test="${orderVO.ostate == 2 ||  orderVO.ostate == 3}">无</c:if>
+                                <c:if test="${orderVO.ostate == 4}">
+                                    <a class="modify J_addressDel"  id="J_orderDel" href="javascript:void(0);" onclick="order_delete(this,${orderVO.oid})"> 删除 </a>
+                                </c:if>
+                            </td>
+                        </tr>
+                        </div>
                     </c:forEach>
                 </table>
 
-                <div id="J_orderListPages">
-                        <c:if test="${pageInfo.total gt pageInfo.limit and not empty userVOList}">
-                            <div id="pager" data-pager-href="${zzy}/admin/user/list?type=${rid}&search=${search}&page=" data-pager-totalPage="${pageInfo.totalPage}" data-pager-nowpage="${pageInfo.current}" data-pager-total="${pageInfo.total}"></div>
-                        </c:if>
-                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <footer>
     <script src="${zzysta}/common/jquery/jquery-3.2.0.min.js"></script>
     <script src="${zzysta}/common/bootstrap/js/bootstrap.min.js"></script>
 
-
-    <script src="${zzysta}/js/admin.js"></script>
     <script src="${zzysta}/js/zySearch.js"></script>
     <script src="${zzysta}/js/jump.js"></script>
     <script src="${zzysta}/js/base.js"></script>
     <script src="${zzysta}/js/main.js"></script>
     <script src="${zzysta}/js/list.js"></script>
     <script src="${zzysta}/js/myapp.js"></script>
-    <script src="${zzysta}/js/area.js"></script>
 
     <script src="${zzysta}/common/layer/layer.js"></script>
+    <script src="${zzysta}/common/pager/jquery.pager.js"></script>
+    <script src="${zzysta}/js/area.js"></script>
     <script src="${zzysta}/js/location.js"></script>
     <script src="${zzysta}/js/select2.js"></script>
     <script src="${zzysta}/js/select2_locale_zh-CN.js"></script>
+    <script src="${zzysta}/js/admin.js"></script>
 
-    <!-- 分页js -->
-    <script src="${zzysta}/common/pager/jquery.pager.js"></script>
     <script type="text/javascript">
         var pagecount = $('#pager').attr('data-pager-totalPage'); // 总页面数
-        var nowpage = $('#pager').attr('data-pager-nowpage'); // 当前页数
+        var current = $('#pager').attr('data-pager-current'); // 当前页数
         var href = $('#pager').attr('data-pager-href'); // 链接地址
         $(document).ready(function() {
             $("#pager").pager({
-                pagenumber : nowpage,
+                pagenumber : current,
                 pagecount : pagecount,
                 buttonClickCallback : PageClick
             });
@@ -152,7 +147,6 @@
             window.location.href = href + number;
         }
     </script>
-
 </footer>
 
 </body>
