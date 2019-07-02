@@ -648,8 +648,8 @@ $(function() {
  * 验证码更改
  */
 $(function () {
-	$('#vcodeImg').click(function () {
-		$(this).attr('src', baselocation + 'checkImg');
+	$('#vcodeImg').on('click', function () {
+		$(this).attr('src', baselocation + '/checkImg?'+Math.random());
 	})
 
 })

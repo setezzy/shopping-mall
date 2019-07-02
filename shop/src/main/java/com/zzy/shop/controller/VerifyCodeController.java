@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class VerifyCodeController {
 
-    @RequestMapping("checkImg")
+    @RequestMapping("/checkImg")
     public void generate(HttpServletResponse response, HttpSession session) {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         String verifycode= drawImg(output);
